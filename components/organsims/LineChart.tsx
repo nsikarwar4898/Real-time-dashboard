@@ -12,7 +12,7 @@ import {
   Filler,
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
-import { lineData, lineOptions } from '@/lib/utils/constants';
+import { lineData, lineOptions } from '@/lib/utils/linechart';
 ChartJS.register(
   CategoryScale,
   LinearScale,
