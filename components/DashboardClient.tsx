@@ -2,9 +2,6 @@
 
 import { DashboardApiResponse } from "@/lib/types/types";
 import { useEffect, useState } from "react";
-// import ChartWidget from "@/components/widgets/ChartWidget";
-// import TableWidget from "@/components/widgets/TableWidget";
-// import MapWidget from "@/components/widgets/MapWidget";
 
 type Props = {
   initialData: DashboardApiResponse;
@@ -25,18 +22,15 @@ export default function DashboardClient({ initialData }: Props) {
       }
     };
 
-    const interval = setInterval(fetchData, 5000);
-
+    const interval = setInterval(fetchData, 20000);
     return () => clearInterval(interval);
   }, []);
-  console.log(data);
+
   return (
     <div className="flex">
       <main className="flex-1 p-4 space-y-4">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {/* <ChartWidget data={data.topProducts} />
-          <TableWidget data={data.topCustomers} />
-          <MapWidget /> */}
+          data
         </div>
       </main>
     </div>

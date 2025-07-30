@@ -1,18 +1,19 @@
 import { DashboardApiResponse } from "../types/types";
+import { envParameters } from "../utils/constants";
 
 export async function fetchDashboardData(): Promise<DashboardApiResponse> {
-  const API_URL = "https://dashboard-api-dusky.vercel.app/api/get";
+  const API_URL = envParameters.webUrl || "";
 
-  const res = await fetch(API_URL, {
+  const dashboardRespose = await fetch(API_URL, {
     cache: "no-store",
     headers: {
-      Authorization: `Bearer ${"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"}`,
+      Authorization: `Bearer ${envParameters.webUrlToken}`,
     },
   });
 
-  if (!res.ok) {
-    throw new Error(`Failed to fetch data: ${res.statusText}`);
+  if (!dashboardRespose.ok) {
+    throw new Error(`Failed to fetch data: ${dashboardRespose.statusText}`);
   }
 
-  return res.json();
+  return dashboardRespose.json();
 }
