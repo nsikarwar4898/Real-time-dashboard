@@ -7,9 +7,11 @@
   --color-bar: var(--bar);
   --color-border: var(--border);
   --color-linechart-line: var(--linechart-line);
-  --color-linechart-underline: var(--color-linechart-underline);
-  --color-linegradient: var(--linegradient);
-  --color-linegradient-under: var(--linegradient-under);
+  --color-linechart-underline: var(--linechart-underline);
+  --color-linegradient-from: var(--linegradient-from);
+  --color-linegradient-to: var(--linegradient-to);
+  --color-linegradient-under-from: var(--linegradient-under-from);
+  --color-linegradient-under-to: var(--linegradient-under-to);
 }
 
 :root {
@@ -18,10 +20,15 @@
   --title: #3e4244;
   --bar: #07557c;
   --border: #d8dcde;
-  --linechar-line: #07557c;
+
+  --linechart-line: #07557c;
   --linechart-underline: #0d72a5;
-  --linegradient: linear-gradient(to bottom, #07557c, #ebf5fa);
-  --linegradient-under: linear-gradient(to bottom, #93d5f5, #ebf5fa);
+
+  --linegradient-from: #07557c;
+  --linegradient-to: #ebf5fa;
+
+  --linegradient-under-from: #93d5f5;
+  --linegradient-under-to: #ebf5fa;
 }
 
 .dark {
@@ -30,8 +37,13 @@
   --title: #d7d7d7;
   --bar: #0d72a5;
   --border: #6b6f71;
+
   --linechart-line: #0d72a5;
   --linechart-underline: #07557c;
-  --linegradient: linear-gradient(to bottom, #0d72a5, #c4ebff);
-  --linegradient-under: linear-gradient(to bottom, #40b1e9, #c4ebff);
+
+  --linegradient-from: #0d72a5;
+  --linegradient-to: #c4ebff;
+
+  --linegradient-under-from: #40b1e9;
+  --linegradient-under-to: #c4ebff;
 }
