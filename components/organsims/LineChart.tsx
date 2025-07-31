@@ -26,7 +26,7 @@ ChartJS.register(
 
 export default function LineChart() {
   return (
-    <div className="h-[350px]">
+    <div className="h-[350px] bg-card-bg">
       <Line data={lineData} options={lineOptions} />
     </div>
   );

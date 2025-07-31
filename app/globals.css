@@ -12,9 +12,10 @@
   --color-linegradient-to: var(--linegradient-to);
   --color-linegradient-under-from: var(--linegradient-under-from);
   --color-linegradient-under-to: var(--linegradient-under-to);
+  --color-card-bg: var(--card-bg);
 }
 
-:root {
+/* :root {
   --background: #fafdff;
   --text: #181b1c;
   --title: #3e4244;
@@ -46,4 +47,4 @@
 
   --linegradient-under-from: #40b1e9;
   --linegradient-under-to: #c4ebff;
-}
+} */

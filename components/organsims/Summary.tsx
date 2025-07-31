@@ -2,33 +2,33 @@
 
 export default function Summary() {
   return (
-    <div className="bg-white">
-      <div className="text-sm text-gray-700 font-medium px-3 py-3 border-b border-gray-300 rounded-t">
+    <div className="bg-card-bg">
+      <div className="text-sm text-title font-medium px-3 py-3 border-b border-border rounded-t">
         Summary
       </div>
 
-      <div className="divide-y divide-gray-200 text-sm">
+      <div className="divide-y divide-border text-sm">
         <div className="px-4 py-2">
-          <div className="text-gray-600">Total sales</div>
-          <div className="text-lg font-semibold">
+          <div className="text-text">Total sales</div>
+          <div className="text-lg text-title font-semibold">
             $150,000.00 <span className="text-sm font-normal">USD</span>
           </div>
         </div>
         <div className="px-4 py-2">
-          <div className="text-gray-600">Total expenses</div>
-          <div className="text-lg font-semibold">
+          <div className="text-text">Total expenses</div>
+          <div className="text-lg text-title font-semibold">
             $12,500.00 <span className="text-sm font-normal">USD</span>
           </div>
         </div>
         <div className="px-4 py-2">
-          <div className="text-gray-600">Gross profit</div>
-          <div className="text-lg font-semibold">
+          <div className="text-text">Gross profit</div>
+          <div className="text-lg text-title font-semibold">
             $137,500.00 <span className="text-sm font-normal">USD</span>
           </div>
         </div>
         <div className="px-4 py-2">
-          <div className="text-gray-600">Total orders</div>
-          <div className="text-lg font-semibold">1,428</div>
+          <div className="text-text">Total orders</div>
+          <div className="text-lg text-title font-semibold">1,428</div>
         </div>
       </div>
     </div>
