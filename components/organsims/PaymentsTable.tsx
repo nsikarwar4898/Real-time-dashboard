@@ -47,17 +47,26 @@ export default function PaymentsTable() {
   ];
 
   return (
-    <div className="bg-white rounded border border-gray-300">
+    <div className="bg-white rounded ">
       <div className="text-sm text-gray-700 font-medium px-4 py-2 border-b border-gray-300 rounded-t">
         Payments history
       </div>
 
       <div className="p-4">
-        <input
-          type="text"
-          placeholder="Filter..."
-          className="mb-3 w-full p-2 border border-gray-300 rounded text-sm"
-        />
+        <div className="flex items-center justify-between w-full py-2 rounded">
+          <input
+            type="text"
+            placeholder="Filter..."
+            className="border border-gray-300 text-sm px-3 py-1 rounded w-1/2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+
+          <select className="border border-gray-300 text-sm px-2 py-1 rounded bg-white">
+            <option>Columns</option>
+            <option>Column 1</option>
+            <option>Column 2</option>
+            <option>Column 3</option>
+          </select>
+        </div>
 
         <table className="w-full text-sm border-collapse">
           <thead className="text-left bg-gray-50 border-b border-gray-300">
@@ -86,14 +95,18 @@ export default function PaymentsTable() {
           </tbody>
         </table>
 
-        <div className="flex items-center justify-between mt-4 text-sm text-gray-600">
-          <div>0 of 3 row(s) selected.</div>
-          <div className="flex items-center space-x-2">
-            <button className="px-2 py-1 border rounded opacity-50" disabled>
+        <div className="flex items-center justify-between py-3 text-sm text-gray-700">
+          <span>0 of 5 row(s) selected.</span>
+
+          <div className="flex items-center space-x-1">
+            <button className="px-2 py-1 border border-gray-300 rounded hover:bg-gray-100">
               &lt;
             </button>
-            <button className="px-2 py-1 rounded bg-gray-200">1</button>
-            <button className="px-2 py-1 border rounded opacity-50" disabled>
+            <button className="px-2 py-1 text-gray-900">1</button>
+            <button className="px-2 py-1 text-gray-900">2</button>
+            <button className="px-2 py-1 text-gray-900">3</button>
+            <span className="px-2 py-1 text-gray-500">...</span>
+            <button className="px-2 py-1 border border-gray-300 rounded hover:bg-gray-100">
               &gt;
             </button>
           </div>

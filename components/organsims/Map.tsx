@@ -13,8 +13,8 @@ import {
   TILE_LAYER_ATTRIBUTION,
   TILE_LAYER_URL,
   ZOOM_LEVEL,
-} from "@/lib/utils/coordinates";
-import { Location } from "@/lib/types/types";
+} from '@/lib/utils/coordinates';
+import { Location } from '@/lib/types/types';
 
 delete (L.Icon.Default.prototype as any)._getIconUrl;
 L.Icon.Default.mergeOptions({
@@ -28,8 +28,6 @@ type MapProps = {
 };
 
 export default function Map({ locations }: MapProps) {
-  console.log(locations);
-
   return (
     <MapContainer
       center={CENTER_COORDINATES}
