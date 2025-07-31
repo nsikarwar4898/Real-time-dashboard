@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { DashboardApiResponse } from '@/lib/types/types';
 import { Responsive, WidthProvider, Layout } from 'react-grid-layout';
 import 'react-grid-layout/css/styles.css';
@@ -16,10 +16,6 @@ import Header from './organsims/Header';
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
-type Props = {
-  initialData: DashboardApiResponse;
-};
-
 const defaultLayout: Layout[] = [
   { i: 'summary', x: 0, y: 0, w: 1, h: 3 },
   { i: 'orders', x: 1, y: 0, w: 1, h: 3 },
@@ -28,29 +24,47 @@ const defaultLayout: Layout[] = [
   { i: 'payments', x: 1.5, y: 2, w: 1.5, h: 4 },
   { i: 'locations', x: 0, y: 5, w: 3, h: 5 },
 ];
+
+type Props = {
+  initialData: DashboardApiResponse;
+};
+
 export default function DashboardClient({ initialData }: Props) {
   const [data, setData] = useState(initialData);
   const [loading, setLoading] = useState(false);
   const [editMode, setEditMode] = useState(false);
   const [layout, setLayout] = useState<Layout[]>(defaultLayout);
+  const [autoFetchEnabled, setAutoFetchEnabled] = useState(true);
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
+  const [lastUpdated, setLastUpdated] = useState('just now');
+
+  const fetchData = async () => {
+    try {
+      setLoading(true);
+      const res = await fetch('/api/dashboard');
+      if (!res.ok) throw new Error('Failed to fetch');
+      const newData = await res.json();
+      setData(newData);
+      setLastUpdated(new Date().toLocaleTimeString());
+    } catch (err) {
+      console.error('Fetch error:', err);
+    }
+    setLoading(false);
+  };
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        setLoading(true);
-        const res = await fetch('/api/dashboard');
-        if (!res.ok) throw new Error('Failed to fetch');
-        const newData = await res.json();
-        setData(newData);
-      } catch (err) {
-        console.error('Polling error:', err);
+    if (autoFetchEnabled) {
+      intervalRef.current = setInterval(fetchData, 20000);
+    } else {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
       }
-      setLoading(false);
-    };
+    }
 
-    const interval = setInterval(fetchData, 20000);
-    return () => clearInterval(interval);
-  }, []);
+    return () => {
+      if (intervalRef.current) clearInterval(intervalRef.current);
+    };
+  }, [autoFetchEnabled]);
 
   const handleResetLayout = () => {
     setLayout(defaultLayout);
@@ -67,10 +81,12 @@ export default function DashboardClient({ initialData }: Props) {
         onToggleEditMode={() => setEditMode(prev => !prev)}
         onReset={handleResetLayout}
       />
+
       <SubHeader
-        lastUpdated="2m ago"
-        onResume={() => console.log('Resume auto-fetch clicked')}
-        onRefresh={() => console.log('Manual refresh clicked')}
+        lastUpdated={lastUpdated}
+        autoFetchEnabled={autoFetchEnabled}
+        onToggleAutoFetch={() => setAutoFetchEnabled(prev => !prev)}
+        onRefresh={fetchData}
       />
 
       <ResponsiveGridLayout
@@ -93,7 +109,7 @@ export default function DashboardClient({ initialData }: Props) {
         <div key="topProducts" className="bg-white p-4 rounded shadow border">
           {loading ? <SummarySkeleton /> : 'Top Products'}
         </div>
-        <div key="salesChart" className="bg-white rounded border border-gray-300">
+        <div key="salesChart" className={`border border-gray-300 rounded ${loading && 'p-4'}`}>
           {loading ? (
             <SummarySkeleton />
           ) : (
@@ -107,14 +123,22 @@ export default function DashboardClient({ initialData }: Props) {
             </>
           )}
         </div>
-        <div key="payments">{loading ? <SummarySkeleton /> : <PaymentsTable />}</div>
-        <div key="locations" className="bg-white rounded border border-gray-300">
-          <div className="text-sm text-gray-700 font-medium px-4 py-2 border-b border-gray-300 rounded-t">
-            Locations
-          </div>
-          <div className="p-4">
-            <Map locations={data.data.dashboardData.map.locations} />
-          </div>
+        <div key="payments" className={`border border-gray-300 rounded ${loading && 'p-4'}`}>
+          {loading ? <SummarySkeleton /> : <PaymentsTable />}
+        </div>
+        <div key="locations" className={`border border-gray-300 rounded ${loading && 'p-4'}`}>
+          {loading ? (
+            <SummarySkeleton />
+          ) : (
+            <>
+              <div className="text-sm text-gray-700 font-medium px-4 py-2 border-b border-gray-300 rounded-t">
+                Locations
+              </div>
+              <div className="p-4">
+                <Map locations={data.data.dashboardData.map.locations} />
+              </div>
+            </>
+          )}
         </div>
       </ResponsiveGridLayout>
     </div>

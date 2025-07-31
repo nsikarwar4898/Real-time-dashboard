@@ -9,8 +9,8 @@ const SkeletonBlock = ({ height = 'h-6', width = 'w-full' }: SkeletonBlockProps)
 
 export const SummarySkeleton = () => (
   <div className="space-y-2 ">
-    <SkeletonBlock width="w-1/2" height="h-5" />
-    <SkeletonBlock width="w-full" height="h-10" />
-    <SkeletonBlock width="w-full" height="h-10" />
+    <SkeletonBlock width="w-1/2" height="h-10" />
+    <SkeletonBlock width="w-full" height="h-15" />
+    <SkeletonBlock width="w-full" height="h-15" />
   </div>
 );
