@@ -43,6 +43,7 @@ export const topLabelPlugin = {
 
 export const barOptions = {
   responsive: true,
+  maintainAspectRatio: false,
   plugins: {
     legend: { display: false, position: 'top' as const },
     title: {

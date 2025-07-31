@@ -16,7 +16,7 @@ ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend)
 
 export default function BarChart() {
   return (
-    <div>
+    <div className="h-full pb-10!">
       <Bar options={barOptions} data={barData} plugins={[topLabelPlugin]} />
     </div>
   );

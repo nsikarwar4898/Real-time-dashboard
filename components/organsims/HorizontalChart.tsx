@@ -20,7 +20,7 @@ ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend)
 
 export default function HorizontalBarChart() {
   return (
-    <div className="w-full max-w-xl mx-auto p-4 ">
+    <div className="w-full max-w-xl mx-auto p-4 h-full pb-10!">
       <Bar options={horizontalChartOptions} data={horizontalChartData} plugins={[topLabelPlugin]} />
     </div>
   );

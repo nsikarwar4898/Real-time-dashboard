@@ -42,6 +42,7 @@ function getCssVar(name: string): string {
 
 export const lineOptions = {
   responsive: true,
+  maintainAspectRatio: false,
   plugins: {
     legend: {
       display: false,

@@ -42,6 +42,7 @@ export const topLabelPlugin = {
 export const horizontalChartOptions = {
   indexAxis: 'y', // ✅ use this to make chart horizontal
   responsive: true,
+  maintainAspectRatio: false,
   plugins: {
     legend: { display: false, position: 'top' },
     title: {
