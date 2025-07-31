@@ -26,7 +26,19 @@ export default function DashboardClient({ initialData }: Props) {
   const [data, setData] = useState(initialData);
   const [loading, setLoading] = useState(false);
   const [editMode, setEditMode] = useState(false);
-  const [layout, setLayout] = useState<Layouts>(defaultLayouts);
+  const [layout, setLayout] = useState<Layouts>(() => {
+    if (typeof window !== 'undefined') {
+      const saved = localStorage.getItem('dashboardLayout');
+      if (saved) {
+        try {
+          return JSON.parse(saved) as Layouts;
+        } catch (e) {
+          console.error('Invalid saved layout:', e);
+        }
+      }
+    }
+    return defaultLayouts;
+  });
   const [autoFetchEnabled, setAutoFetchEnabled] = useState(true);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
   const [lastUpdated, setLastUpdated] = useState('just now');
@@ -61,8 +73,8 @@ export default function DashboardClient({ initialData }: Props) {
 
   const handleResetLayout = () => {
     setLayout(defaultLayouts);
+    localStorage.removeItem('dashboardLayout');
   };
-
   return (
     <div className="p-4">
       <Header
@@ -89,7 +101,10 @@ export default function DashboardClient({ initialData }: Props) {
         containerPadding={[0, 0]}
         margin={[10, 10]}
         useCSSTransforms={true}
-        onLayoutChange={(layout, allLayouts) => setLayout(allLayouts)}
+        onLayoutChange={(layout, allLayouts) => {
+          setLayout(allLayouts);
+          localStorage.setItem('dashboardLayout', JSON.stringify(allLayouts));
+        }}
       >
         <div key="summary" className={`border border-gray-300 rounded ${loading && 'p-4'}`}>
           {loading ? <SummarySkeleton /> : <Summary />}
