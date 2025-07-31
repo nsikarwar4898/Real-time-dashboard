@@ -8,6 +8,11 @@ import 'react-resizable/css/styles.css';
 
 import Map from './organsims/Map';
 import LineChart from './organsims/LineChart';
+import { SummarySkeleton } from './skeletons/DashboardSkeleton';
+import PaymentsTable from './organsims/PaymentsTable';
+import Summary from './organsims/Summary';
+import SubHeader from './organsims/SubHeader';
+import Header from './organsims/Header';
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
@@ -15,12 +20,24 @@ type Props = {
   initialData: DashboardApiResponse;
 };
 
+const defaultLayout: Layout[] = [
+  { i: 'summary', x: 0, y: 0, w: 1, h: 3 },
+  { i: 'orders', x: 1, y: 0, w: 1, h: 3 },
+  { i: 'topProducts', x: 2, y: 0, w: 1, h: 3 },
+  { i: 'salesChart', x: 0, y: 2, w: 1.5, h: 4 },
+  { i: 'payments', x: 1.5, y: 2, w: 1.5, h: 4 },
+  { i: 'locations', x: 0, y: 5, w: 3, h: 5 },
+];
 export default function DashboardClient({ initialData }: Props) {
   const [data, setData] = useState(initialData);
+  const [loading, setLoading] = useState(false);
+  const [editMode, setEditMode] = useState(false);
+  const [layout, setLayout] = useState<Layout[]>(defaultLayout);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
+        setLoading(true);
         const res = await fetch('/api/dashboard');
         if (!res.ok) throw new Error('Failed to fetch');
         const newData = await res.json();
@@ -28,24 +45,33 @@ export default function DashboardClient({ initialData }: Props) {
       } catch (err) {
         console.error('Polling error:', err);
       }
+      setLoading(false);
     };
 
     const interval = setInterval(fetchData, 20000);
     return () => clearInterval(interval);
   }, []);
 
-  const layout: Layout[] = [
-    { i: 'summary', x: 0, y: 0, w: 1, h: 2 },
-    { i: 'orders', x: 1, y: 0, w: 1, h: 2 },
-    { i: 'topProducts', x: 2, y: 0, w: 1, h: 2 },
-    { i: 'salesChart', x: 0, y: 2, w: 1.5, h: 3 },
-    { i: 'payments', x: 1.5, y: 2, w: 1.5, h: 3 },
-    { i: 'locations', x: 0, y: 5, w: 3, h: 3 },
-  ];
+  const handleResetLayout = () => {
+    setLayout(defaultLayout);
+  };
+
+  const onLayoutChange = (newLayout: Layout[]) => {
+    setLayout(newLayout);
+  };
 
   return (
     <div className="p-4">
-      <h1 className="text-2xl font-bold mb-4">Dashboard</h1>
+      <Header
+        editMode={editMode}
+        onToggleEditMode={() => setEditMode(prev => !prev)}
+        onReset={handleResetLayout}
+      />
+      <SubHeader
+        lastUpdated="2m ago"
+        onResume={() => console.log('Resume auto-fetch clicked')}
+        onRefresh={() => console.log('Manual refresh clicked')}
+      />
 
       <ResponsiveGridLayout
         className="layout"
@@ -53,30 +79,35 @@ export default function DashboardClient({ initialData }: Props) {
         breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
         cols={{ lg: 3, md: 2, sm: 2, xs: 1, xxs: 1 }}
         rowHeight={100}
-        isResizable
-        isDraggable
+        isResizable={false}
+        isDraggable={editMode}
         useCSSTransforms={true}
+        onLayoutChange={onLayoutChange}
       >
-        <div key="summary" className="bg-white p-4 rounded shadow border">
-          Summary
+        <div key="summary" className={`border border-gray-300 rounded ${loading && 'p-4'}`}>
+          {loading ? <SummarySkeleton /> : <Summary />}
         </div>
         <div key="orders" className="bg-white p-4 rounded shadow border">
-          Orders
+          {loading ? <SummarySkeleton /> : 'Orders'}
         </div>
         <div key="topProducts" className="bg-white p-4 rounded shadow border">
-          Top Products
+          {loading ? <SummarySkeleton /> : 'Top Products'}
         </div>
         <div key="salesChart" className="bg-white rounded border border-gray-300">
-          <div className="text-sm text-gray-700 font-medium px-4 py-2 border-b border-gray-300 rounded-t">
-            Sales Chart
-          </div>
-          <div className="p-4">
-            <LineChart />
-          </div>
+          {loading ? (
+            <SummarySkeleton />
+          ) : (
+            <>
+              <div className="text-sm text-gray-700 font-medium px-4 py-2 border-b border-gray-300 rounded-t">
+                Sales Chart
+              </div>
+              <div className="p-4">
+                <LineChart />
+              </div>
+            </>
+          )}
         </div>
-        <div key="payments" className="bg-white p-4 rounded shadow border">
-          Payments Table
-        </div>
+        <div key="payments">{loading ? <SummarySkeleton /> : <PaymentsTable />}</div>
         <div key="locations" className="bg-white rounded border border-gray-300">
           <div className="text-sm text-gray-700 font-medium px-4 py-2 border-b border-gray-300 rounded-t">
             Locations
