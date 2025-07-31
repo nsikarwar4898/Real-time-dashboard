@@ -5,8 +5,6 @@ import { DashboardApiResponse } from '@/lib/types/types';
 import { Responsive, WidthProvider, Layouts } from 'react-grid-layout';
 import 'react-grid-layout/css/styles.css';
 import 'react-resizable/css/styles.css';
-import Map from './organsims/Map';
-import LineChart from './organsims/LineChart';
 import { SummarySkeleton } from './skeletons/DashboardSkeleton';
 import PaymentsTable from './organsims/PaymentsTable';
 import Summary from './organsims/Summary';
@@ -15,12 +13,15 @@ import Header from './organsims/Header';
 import BarChart from './organsims/BarChart';
 import HorizontalBarChart from './organsims/HorizontalChart';
 import { defaultLayouts } from '@/lib/utils/gridLayout';
+import dynamic from 'next/dynamic';
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
 type Props = {
   initialData: DashboardApiResponse;
 };
+const Map = dynamic(() => import('./organsims/Map'), { ssr: false });
+const LineChart = dynamic(() => import('./organsims/LineChart'), { ssr: false });
 
 export default function DashboardClient({ initialData }: Props) {
   const [data, setData] = useState(initialData);
