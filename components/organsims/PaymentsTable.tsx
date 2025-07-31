@@ -47,8 +47,8 @@ export default function PaymentsTable() {
   ];
 
   return (
-    <div className="bg-white rounded ">
-      <div className="text-sm text-gray-700 font-medium px-4 py-2 border-b border-gray-300 rounded-t">
+    <div className="bg-card-bg rounded ">
+      <div className="text-sm text-title font-medium px-4 py-2 border-b border-border rounded-t">
         Payments history
       </div>
 
@@ -57,10 +57,10 @@ export default function PaymentsTable() {
           <input
             type="text"
             placeholder="Filter..."
-            className="border border-gray-300 text-sm px-3 py-1 rounded w-1/2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="border placeholder-title border-border text-sm px-3 py-1 rounded w-1/2 focus:outline-none focus:ring-2 focus:border-2"
           />
 
-          <select className="border border-gray-300 text-sm px-2 py-1 rounded bg-white">
+          <select className="border text-title border-border text-sm px-2 py-1 rounded bg-card-bg">
             <option>Columns</option>
             <option>Column 1</option>
             <option>Column 2</option>
@@ -69,7 +69,7 @@ export default function PaymentsTable() {
         </div>
 
         <table className="w-full text-sm border-collapse">
-          <thead className="text-left bg-gray-50 border-b border-gray-300">
+          <thead className="text-left text-title bg-card-bg border-b border-border">
             <tr>
               <th className="p-2">
                 <input type="checkbox" />
@@ -82,7 +82,7 @@ export default function PaymentsTable() {
           </thead>
           <tbody>
             {payments.map(payment => (
-              <tr key={payment.id} className="border-b border-gray-200 hover:bg-gray-50">
+              <tr key={payment.id} className="border-b border-border text-text">
                 <td className="p-2">
                   <input type="checkbox" />
                 </td>
@@ -95,18 +95,18 @@ export default function PaymentsTable() {
           </tbody>
         </table>
 
-        <div className="flex items-center justify-between py-3 text-sm text-gray-700">
+        <div className="flex  items-center justify-between py-3 text-sm text-title">
           <span>0 of 5 row(s) selected.</span>
 
           <div className="flex items-center space-x-1">
-            <button className="px-2 py-1 border border-gray-300 rounded hover:bg-gray-100">
+            <button className="px-2 py-1 border border-border rounded ">
               &lt;
             </button>
-            <button className="px-2 py-1 text-gray-900">1</button>
-            <button className="px-2 py-1 text-gray-900">2</button>
-            <button className="px-2 py-1 text-gray-900">3</button>
-            <span className="px-2 py-1 text-gray-500">...</span>
-            <button className="px-2 py-1 border border-gray-300 rounded hover:bg-gray-100">
+            <button className="px-2 py-1 text-title">1</button>
+            <button className="px-2 py-1 text-title">2</button>
+            <button className="px-2 py-1 text-title">3</button>
+            <span className="px-2 py-1 text-title">...</span>
+            <button className="px-2 py-1 border border-border rounded">
               &gt;
             </button>
           </div>

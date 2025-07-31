@@ -55,6 +55,7 @@ export default function DashboardClient({ initialData }: Props) {
     } catch (err) {
       console.error('Fetch error:', err);
     }
+    if (!window.theme_loaded) window.theme_loaded = true;
     setLoading(false);
   };
 
@@ -66,6 +67,8 @@ export default function DashboardClient({ initialData }: Props) {
         clearInterval(intervalRef.current);
       }
     }
+
+    if (window.theme_loaded) window.theme_loaded = false;
 
     return () => {
       if (intervalRef.current) clearInterval(intervalRef.current);
@@ -107,38 +110,40 @@ export default function DashboardClient({ initialData }: Props) {
           localStorage.setItem('dashboardLayout', JSON.stringify(allLayouts));
         }}
       >
-        <div key="summary" className={`border border-gray-300 rounded ${loading && 'p-4'}`}>
+        <div key="summary" className={`border border-border  bg-card-bg rounded ${loading && 'p-4'}`}>
           {loading ? <SummarySkeleton /> : <Summary />}
         </div>
-        <div key="orders" className={`border border-gray-300 rounded  ${loading && 'p-4'}`}>
-          {loading ? (
+        <div key="orders" className={`border border-border bg-card-bg rounded  ${loading && 'p-4'}`}>
+          {loading && !window.theme_loaded ? (
             <SummarySkeleton />
           ) : (
             <>
-              <div className="text-sm text-gray-700 p-2 border border-gray-300 rounded">Orders</div>
+              <div className="text-sm text-title p-2 border border-border bg-card-bg rounded">
+                Orders
+              </div>
               <HorizontalBarChart />
             </>
           )}
         </div>
         <div key="topProducts" className={`border border-gray-300 rounded ${loading && 'p-4'}`}>
-          {loading ? (
+          {loading && !window.theme_loaded ? (
             <SummarySkeleton />
           ) : (
             <>
-              <div className="text-sm text-gray-700 p-2">Top products</div>
+              <div className="text-sm text-title bg-card-bg p-2">Top products</div>
               <BarChart />
             </>
           )}
         </div>
         <div key="salesChart" className={`border border-gray-300 rounded ${loading && 'p-4'}`}>
-          {loading ? (
+          {loading && !window.theme_loaded ? (
             <SummarySkeleton />
           ) : (
             <>
-              <div className="text-sm text-gray-700 font-medium px-4 py-2 border-b border-gray-300 rounded-t">
+              <div className="text-sm text-title font-medium px-4 py-2 border-b border-border bg-card-bg rounded-t">
                 Sales Chart
               </div>
-              <div className="p-4">
+              <div className="p-4 bg-card-bg">
                 <LineChart />
               </div>
             </>
@@ -152,10 +157,10 @@ export default function DashboardClient({ initialData }: Props) {
             <SummarySkeleton />
           ) : (
             <>
-              <div className="text-sm text-gray-700 font-medium px-4 py-2 border-b border-gray-300 rounded-t">
+              <div className="text-sm  bg-card-bg text-title font-medium px-4 py-2 border-b border-border rounded-t">
                 Locations
               </div>
-              <div className="p-4">
+              <div className="p-4 bg-card-bg">
                 <Map locations={data.data.dashboardData.map.locations} />
               </div>
             </>

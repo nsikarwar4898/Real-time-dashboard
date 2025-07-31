@@ -56,6 +56,7 @@ export const horizontalChartOptions = {
       border: { display: false },
       ticks: {
         stepSize: 20,
+        display: false,
         font: {
           size: 14,
           weight: 'bold',
