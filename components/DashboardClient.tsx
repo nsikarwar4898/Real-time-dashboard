@@ -114,7 +114,9 @@ export default function DashboardClient({ initialData }: Props) {
             <SummarySkeleton />
           ) : (
             <>
-              <div className="text-sm text-gray-700 p-2 border border-gray-300 rounded">Orders</div>
+              <div className="text-sm text-gray-700 p-2 border-b border-gray-300 rounded">
+                Orders
+              </div>
               <HorizontalBarChart />
             </>
           )}
