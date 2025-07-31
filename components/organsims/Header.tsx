@@ -1,6 +1,7 @@
 'use client';
 
-import { FiSettings } from 'react-icons/fi';
+import { HiSun } from 'react-icons/hi';
+import Logo from '../icons/Logo';
 
 type Props = {
   editMode: boolean;
@@ -38,12 +39,12 @@ export default function Header({ editMode, onToggleEditMode, onReset }: Props) {
 
       <div className="flex items-center gap-2">
         <span className="text-blue-800 font-semibold text-lg flex items-center gap-1">
-          <span className="bg-blue-800 w-4 h-4 rounded-sm inline-block" /> acme
+          <Logo /> acme
         </span>
       </div>
 
       <button className="p-2 hover:bg-gray-100 rounded">
-        <FiSettings className="w-5 h-5 text-gray-600" />
+        <HiSun className="w-5 h-5 text-gray-600" />
       </button>
     </header>
   );
