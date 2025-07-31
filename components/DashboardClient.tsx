@@ -1,9 +1,10 @@
-"use client";
+'use client';
 
-import { DashboardApiResponse } from "@/lib/types/types";
-import { useEffect, useState } from "react";
-import Map from "./organsims/Map";
-import LineChart from "./organsims/LineChart";
+import { DashboardApiResponse } from '@/lib/types/types';
+import { useEffect, useState } from 'react';
+import Map from './organsims/Map';
+import LineChart from './organsims/LineChart';
+import BarChart from './organsims/BarChart';
 
 type Props = {
   initialData: DashboardApiResponse;
@@ -15,19 +16,19 @@ export default function DashboardClient({ initialData }: Props) {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await fetch("/api/dashboard");
-        if (!res.ok) throw new Error("Failed to fetch");
+        const res = await fetch('/api/dashboard');
+        if (!res.ok) throw new Error('Failed to fetch');
         const newData = await res.json();
         setData(newData);
       } catch (err) {
-        console.error("Polling error:", err);
+        console.error('Polling error:', err);
       }
     };
 
     const interval = setInterval(fetchData, 20000);
     return () => clearInterval(interval);
   }, []);
-  console.log(data, "kk");
+  console.log(data, 'kk');
   return (
     <div className="flex">
       <main className="flex-1 p-4 space-y-4">
@@ -38,7 +39,9 @@ export default function DashboardClient({ initialData }: Props) {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div className="bg-white p-4 rounded shadow border">Summary</div>
           <div className="bg-white p-4 rounded shadow border">Orders</div>
-          <div className="bg-white p-4 rounded shadow border">Top Products</div>
+          <div className="bg-white p-4 rounded shadow border">
+            <BarChart />
+          </div>
         </div>
 
         {/* Middle grid: Line chart + Table */}
@@ -52,9 +55,7 @@ export default function DashboardClient({ initialData }: Props) {
             </div>
           </div>
 
-          <div className="bg-white p-4 rounded shadow border">
-            Payments Table
-          </div>
+          <div className="bg-white p-4 rounded shadow border">Payments Table</div>
         </div>
 
         {/* Full width map */}
