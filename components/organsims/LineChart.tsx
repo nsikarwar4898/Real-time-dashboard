@@ -25,5 +25,9 @@ ChartJS.register(
 );
 
 export default function LineChart() {
-  return <Line data={lineData} options={lineOptions} />;
+  return (
+    <div className="h-[350px]">
+      <Line data={lineData} options={lineOptions} />
+    </div>
+  );
 }
