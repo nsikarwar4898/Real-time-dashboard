@@ -16,15 +16,15 @@ export default function SubHeader({
   onRefresh,
 }: Props) {
   return (
-    <div className="flex items-center justify-between px-3 py-3 bg-white">
+    <div className="flex items-center justify-between px-3 py-3 bg-background">
       <h1 className="text-2xl font-bold">Dashboard</h1>
 
-      <div className="flex items-center gap-2 text-sm text-gray-500">
+      <div className="flex items-center gap-2 text-sm text-text">
         <span>Last updated {lastUpdated}</span>
 
         <button
           onClick={onToggleAutoFetch}
-          className="flex items-center gap-1 px-2 py-1 text-sm border border-gray-300 rounded hover:bg-gray-100"
+          className="flex items-center gap-1 px-2 py-1 text-sm border border-border rounded "
         >
           {autoFetchEnabled ? (
             <>
@@ -39,10 +39,7 @@ export default function SubHeader({
           )}
         </button>
 
-        <button
-          onClick={onRefresh}
-          className="p-2 border border-gray-300 rounded hover:bg-gray-100"
-        >
+        <button onClick={onRefresh} className="p-2 border border-border rounded">
           <FiRefreshCw className="w-4 h-4" />
         </button>
       </div>

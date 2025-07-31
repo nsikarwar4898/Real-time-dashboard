@@ -102,44 +102,44 @@ export default function DashboardClient({ initialData }: Props) {
         useCSSTransforms={true}
         onLayoutChange={onLayoutChange}
       >
-        <div key="summary" className={`border border-gray-300 rounded ${loading && 'p-4'}`}>
+        <div key="summary" className={`border border-border rounded ${loading && 'p-4'}`}>
           {loading ? <SummarySkeleton /> : <Summary />}
         </div>
-        <div key="orders" className="bg-white p-4 rounded shadow border">
+        <div key="orders" className="bg-card-bg p-4 rounded shadow border">
           {loading ? <SummarySkeleton /> : <HorizontalBarChart />}
         </div>
-        <div key="topProducts" className="bg-white p-4 rounded shadow border">
+        <div key="topProducts" className="bg-card-bg p-4 rounded shadow border">
           {loading ? <SummarySkeleton /> : <BarChart />}
         </div>
-        <div key="salesChart" className={`border border-gray-300 rounded ${loading && 'p-4'}`}>
+        <div key="salesChart" className={`border border-border rounded ${loading && 'p-4'}`}>
           {loading ? (
             <SummarySkeleton />
           ) : (
-            <>
-              <div className="text-sm text-gray-700 font-medium px-4 py-2 border-b border-gray-300 rounded-t">
+            <div className='bg-card-bg'>
+              <div className="text-sm text-title font-medium px-4 py-2 border-b border-border rounded-t">
                 Sales Chart
               </div>
               <div className="p-4">
                 <LineChart />
               </div>
-            </>
+            </div>
           )}
         </div>
-        <div key="payments" className={`border border-gray-300 rounded ${loading && 'p-4'}`}>
+        <div key="payments" className={`border bg-card-bg border-border rounded ${loading && 'p-4'}`}>
           {loading ? <SummarySkeleton /> : <PaymentsTable />}
         </div>
-        <div key="locations" className={`border border-gray-300 rounded ${loading && 'p-4'}`}>
+        <div key="locations" className={`border border-border rounded mt-16 ${loading && 'p-4'}`}>
           {loading ? (
             <SummarySkeleton />
           ) : (
-            <>
-              <div className="text-sm text-gray-700 font-medium px-4 py-2 border-b border-gray-300 rounded-t">
+            <div className='bg-card-bg mt-4'>
+              <div className="text-sm text-text font-medium px-4 py-2 border-b border-border rounded-t">
                 Locations
               </div>
               <div className="p-4">
                 <Map locations={data.data.dashboardData.map.locations} />
               </div>
-            </>
+            </div>
           )}
         </div>
       </ResponsiveGridLayout>

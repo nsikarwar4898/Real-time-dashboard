@@ -55,6 +55,9 @@ export const barOptions = {
       grid: { display: false, drawBorder: false },
       border: { display: false },
       ticks: {
+        color:()=>{
+          return getCssVar('--text')
+        },
         font: {
           size: 14,
           weight: 'bold',
@@ -65,6 +68,9 @@ export const barOptions = {
       beginAtZero: true,
       grid: { display: true, drawBorder: false },
       ticks: {
+        color:()=>{
+          return getCssVar('--text')
+        },
         stepSize: 20,
         font: {
           size: 14,

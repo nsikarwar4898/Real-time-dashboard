@@ -12,10 +12,12 @@
   --color-linegradient-to: var(--linegradient-to);
   --color-linegradient-under-from: var(--linegradient-under-from);
   --color-linegradient-under-to: var(--linegradient-under-to);
+  --color-card-bg: var(--card-bg);
 }
 
 :root {
   --background: #fafdff;
+  --card-bg: white;
   --text: #181b1c;
   --title: #3e4244;
   --bar: #07557c;
@@ -33,6 +35,7 @@
 
 .dark {
   --background: #6b6f71;
+  --card-bg: #181b1c;
   --text: #ebebeb;
   --title: #d7d7d7;
   --bar: #0d72a5;
