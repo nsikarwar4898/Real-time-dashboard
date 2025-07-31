@@ -51,9 +51,10 @@ export const horizontalChartOptions = {
   },
   scales: {
     x: {
-      grid: { display: false, drawBorder: false },
+      grid: { display: true, drawBorder: false },
       border: { display: false },
       ticks: {
+        stepSize: 20,
         font: {
           size: 14,
           weight: 'bold',
@@ -63,8 +64,9 @@ export const horizontalChartOptions = {
     y: {
       reverse: true,
       beginAtZero: true,
-      grid: { display: true, drawBorder: false },
+      grid: { display: false, drawBorder: false },
       ticks: {
+        stepsize: 20,
         display: true,
         font: {
           size: 14,

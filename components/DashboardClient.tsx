@@ -106,7 +106,7 @@ export default function DashboardClient({ initialData }: Props) {
           {loading ? <SummarySkeleton /> : <Summary />}
         </div>
         <div key="orders" className="bg-white p-4 rounded shadow border">
-          {loading ? <SummarySkeleton /> : 'Orders'}
+          {loading ? <SummarySkeleton /> : <HorizontalBarChart />}
         </div>
         <div key="topProducts" className="bg-white p-4 rounded shadow border">
           {loading ? <SummarySkeleton /> : <BarChart />}
