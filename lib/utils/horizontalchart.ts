@@ -1,16 +1,17 @@
 const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'];
 const fixedData = [20, 45, 32, 60, 38, 75];
 
-export const barData = {
+function getCssVar(name: string): string {
+  return getComputedStyle(document.documentElement).getPropertyValue(name).trim() || '#07557c';
+}
+
+export const horizontalChartData = {
   labels: months,
   datasets: [
     {
       label: 'Fixed Dataset',
-      diplay: false,
       data: fixedData,
       backgroundColor: () => {
-        console.log(getCssVar('--bar'));
-
         return getCssVar('--bar');
       },
       borderRadius: 8,
@@ -18,10 +19,6 @@ export const barData = {
     },
   ],
 };
-
-function getCssVar(name: string): string {
-  return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
-}
 
 export const topLabelPlugin = {
   id: 'topLabelPlugin',
@@ -34,17 +31,19 @@ export const topLabelPlugin = {
         const value = dataset.data[index];
         ctx.fillStyle = '#000';
         ctx.font = 'bold 12px sans-serif';
-        ctx.textAlign = 'center';
-        ctx.fillText(value, bar.x, bar.y - 8);
+        ctx.textAlign = 'left';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(value, bar.x + 10, bar.y); // ✅ horizontal bar label positioning
       });
     });
   },
 };
 
-export const barOptions = {
+export const horizontalChartOptions = {
+  indexAxis: 'y', // ✅ use this to make chart horizontal
   responsive: true,
   plugins: {
-    legend: { display: false, position: 'top' as const },
+    legend: { display: false, position: 'top' },
     title: {
       display: false,
       text: 'Monthly Data (Jan - Jun)',
@@ -62,15 +61,15 @@ export const barOptions = {
       },
     },
     y: {
+      reverse: true,
       beginAtZero: true,
       grid: { display: true, drawBorder: false },
       ticks: {
-        stepSize: 20,
+        display: true,
         font: {
           size: 14,
           weight: 'bold',
         },
-        display: false,
       },
       border: { display: false },
     },

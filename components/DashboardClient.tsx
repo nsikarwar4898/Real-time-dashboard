@@ -14,6 +14,7 @@ import Summary from './organsims/Summary';
 import SubHeader from './organsims/SubHeader';
 import Header from './organsims/Header';
 import BarChart from './organsims/BarChart';
+import HorizontalBarChart from './organsims/HorizontalChart';
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
