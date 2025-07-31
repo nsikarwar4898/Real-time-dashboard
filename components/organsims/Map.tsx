@@ -1,11 +1,11 @@
-"use client";
+'use client';
 
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
-import "leaflet/dist/leaflet.css";
-import L from "leaflet";
-import markerIcon2x from "leaflet/dist/images/marker-icon-2x.png";
-import markerIcon from "leaflet/dist/images/marker-icon.png";
-import markerShadow from "leaflet/dist/images/marker-shadow.png";
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import 'leaflet/dist/leaflet.css';
+import L from 'leaflet';
+import markerIcon2x from 'leaflet/dist/images/marker-icon-2x.png';
+import markerIcon from 'leaflet/dist/images/marker-icon.png';
+import markerShadow from 'leaflet/dist/images/marker-shadow.png';
 import {
   CENTER_COORDINATES,
   MAP_HEIGHT,
@@ -13,7 +13,7 @@ import {
   TILE_LAYER_ATTRIBUTION,
   TILE_LAYER_URL,
   ZOOM_LEVEL,
-} from "@/lib/utils/coordinates";
+} from '@/lib/utils/coordinates';
 
 delete (L.Icon.Default.prototype as any)._getIconUrl;
 L.Icon.Default.mergeOptions({
@@ -24,9 +24,9 @@ L.Icon.Default.mergeOptions({
 
 //locations will come from the api
 const LOCATIONS: { lat: number; lng: number; label: string }[] = [
-  { lat: 28.6139, lng: 77.209, label: "Delhi" },
-  { lat: 19.076, lng: 72.8777, label: "Mumbai" },
-  { lat: 13.0827, lng: 80.2707, label: "Chennai" },
+  { lat: 28.6139, lng: 77.209, label: 'Delhi' },
+  { lat: 19.076, lng: 72.8777, label: 'Mumbai' },
+  { lat: 13.0827, lng: 80.2707, label: 'Chennai' },
 ];
 
 export default function Map() {

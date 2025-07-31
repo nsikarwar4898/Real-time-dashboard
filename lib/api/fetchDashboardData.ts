@@ -1,11 +1,11 @@
-import { DashboardApiResponse } from "../types/types";
-import { envParameters } from "../utils/constants";
+import { DashboardApiResponse } from '../types/types';
+import { envParameters } from '../utils/constants';
 
 export async function fetchDashboardData(): Promise<DashboardApiResponse> {
-  const API_URL = envParameters.webUrl || "";
+  const API_URL = envParameters.webUrl || '';
 
   const dashboardRespose = await fetch(API_URL, {
-    cache: "no-store",
+    cache: 'no-store',
     headers: {
       Authorization: `Bearer ${envParameters.webUrlToken}`,
     },
