@@ -13,7 +13,8 @@ import {
   TILE_LAYER_ATTRIBUTION,
   TILE_LAYER_URL,
   ZOOM_LEVEL,
-} from '@/lib/utils/coordinates';
+} from "@/lib/utils/coordinates";
+import { Location } from "@/lib/types/types";
 
 delete (L.Icon.Default.prototype as any)._getIconUrl;
 L.Icon.Default.mergeOptions({
@@ -22,14 +23,13 @@ L.Icon.Default.mergeOptions({
   shadowUrl: markerShadow.src,
 });
 
-//locations will come from the api
-const LOCATIONS: { lat: number; lng: number; label: string }[] = [
-  { lat: 28.6139, lng: 77.209, label: 'Delhi' },
-  { lat: 19.076, lng: 72.8777, label: 'Mumbai' },
-  { lat: 13.0827, lng: 80.2707, label: 'Chennai' },
-];
+type MapProps = {
+  locations: Location[];
+};
 
-export default function Map() {
+export default function Map({ locations }: MapProps) {
+  console.log(locations);
+
   return (
     <MapContainer
       center={CENTER_COORDINATES}
@@ -38,8 +38,8 @@ export default function Map() {
       style={{ height: MAP_HEIGHT, width: MAP_WIDTH }}
     >
       <TileLayer attribution={TILE_LAYER_ATTRIBUTION} url={TILE_LAYER_URL} />
-      {LOCATIONS.map((location, idx) => (
-        <Marker key={idx} position={[location.lat, location.lng]}>
+      {locations.map((location, idx) => (
+        <Marker key={idx} position={[location.latitude, location.longitude]}>
           <Popup>{location.label}</Popup>
         </Marker>
       ))}
