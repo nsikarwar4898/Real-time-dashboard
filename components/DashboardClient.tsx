@@ -51,6 +51,8 @@ export default function DashboardClient({ initialData }: Props) {
       const res = await fetch('/api/dashboard');
       if (!res.ok) throw new Error('Failed to fetch');
       const newData = await res.json();
+
+      console.log(newData, 'this is new data');
       setData(newData);
       setLastUpdated(new Date().toLocaleTimeString());
     } catch (err) {
@@ -137,7 +139,7 @@ export default function DashboardClient({ initialData }: Props) {
             <>
               <div className="text-sm text-title p-2 border-b border-border">Orders</div>
               <div className="flex-1 p-2">
-                <HorizontalBarChart />
+                <HorizontalBarChart data={data.data.dashboardData.charts.userEngagement}/>
               </div>
             </>
           )}
@@ -157,7 +159,7 @@ export default function DashboardClient({ initialData }: Props) {
                 Top Products
               </div>
               <div className="flex-1 p-2">
-                <BarChart />
+                <BarChart data={data.data.dashboardData.tables.topProducts} />
               </div>
             </>
           )}
@@ -177,7 +179,7 @@ export default function DashboardClient({ initialData }: Props) {
                 Sales Chart
               </div>
               <div className="flex-1 p-4">
-                <LineChart />
+                <LineChart data={data.data.dashboardData.charts.salesOverTime.data} labels={data.data.dashboardData.charts.salesOverTime.labels} />
               </div>
             </>
           )}
@@ -187,7 +189,7 @@ export default function DashboardClient({ initialData }: Props) {
           key="payments"
           className="h-full overflow-hidden bg-card-bg border border-border rounded-2xl p-4"
         >
-          {loading ? <SummarySkeleton /> : <PaymentsTable />}
+          {loading ? <SummarySkeleton /> : <PaymentsTable data={data.data.dashboardData.tables.recentTransactions}/>}
         </div>
 
         <div

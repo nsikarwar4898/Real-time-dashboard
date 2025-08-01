@@ -1,6 +1,17 @@
 'use client';
 
-export default function PaymentsTable() {
+interface Transaction {
+  id: number;
+  user: string;
+  amount: string;
+  date: string;
+}
+
+interface paymentProps {
+  data: Transaction[];
+}
+
+export default function PaymentsTable({ data }: paymentProps) {
   const payments = [
     {
       id: '1',
@@ -81,15 +92,15 @@ export default function PaymentsTable() {
             </tr>
           </thead>
           <tbody>
-            {payments.map(payment => (
+            {data.map(payment => (
               <tr key={payment.id} className="border-b border-border text-text">
                 <td className="p-2">
                   <input type="checkbox" />
                 </td>
-                <td className="p-2">{payment.status}</td>
-                <td className="p-2">{payment.email}</td>
-                <td className="p-2">${payment.amount.toFixed(2)}</td>
-                <td className="p-2">${payment.totalNet.toFixed(2)}</td>
+                <td className="p-2">success</td>
+                <td className="p-2">{payment.user}@yahoo.com</td>
+                <td className="p-2">${payment.amount}</td>
+                <td className="p-2">${payment.amount}</td>
               </tr>
             ))}
           </tbody>
@@ -99,16 +110,12 @@ export default function PaymentsTable() {
           <span>0 of 5 row(s) selected.</span>
 
           <div className="flex items-center space-x-1">
-            <button className="px-2 py-1 border border-border rounded ">
-              &lt;
-            </button>
+            <button className="px-2 py-1 border border-border rounded ">&lt;</button>
             <button className="px-2 py-1 text-title">1</button>
             <button className="px-2 py-1 text-title">2</button>
             <button className="px-2 py-1 text-title">3</button>
             <span className="px-2 py-1 text-title">...</span>
-            <button className="px-2 py-1 border border-border rounded">
-              &gt;
-            </button>
+            <button className="px-2 py-1 border border-border rounded">&gt;</button>
           </div>
         </div>
       </div>

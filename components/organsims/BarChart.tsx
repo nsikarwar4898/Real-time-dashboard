@@ -10,13 +10,98 @@ import {
   Legend,
 } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
-import { barData, barOptions, topLabelPlugin } from '@/lib/utils/barchart';
+import { useEffect, useState } from 'react';
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
-export default function BarChart() {
+// ✅ Fix props: it should be `data: barChartProps[]`
+interface BarChartProps {
+  data: {
+    id: string;
+    name: string;
+    sales: number;
+  }[];
+}
+
+function getCssVar(name: string): string {
+  return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+}
+
+export default function BarChart({ data }: BarChartProps) {
+  const labels = data.map(item => item.name.split(' ')[1]);
+  const values = data.map(item => item.sales);
+
+  const barData = {
+    labels,
+    datasets: [
+      {
+        label: 'Monthly Sales',
+        data: values,
+        backgroundColor: () => {
+          return getCssVar('--bar');
+        },
+        borderRadius: 8,
+        borderSkipped: false,
+      },
+    ],
+  };
+
+  const topLabelPlugin = {
+    id: 'topLabelPlugin',
+    afterDatasetsDraw(chart: any) {
+      const { ctx } = chart;
+      chart.data.datasets.forEach((dataset: any, i: number) => {
+        const meta = chart.getDatasetMeta(i);
+        meta.data.forEach((bar: any, index: number) => {
+          const value = dataset.data[index];
+          ctx.fillStyle = getCssVar('--text');
+          ctx.font = 'bold 12px sans-serif';
+          ctx.textAlign = 'center';
+          ctx.fillText(value, bar.x, bar.y - 8);
+        });
+      });
+    },
+  };
+
+  const barOptions = {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: { display: false },
+      title: {
+        display: false,
+        text: 'Monthly Sales Data',
+      },
+    },
+    scales: {
+      x: {
+        grid: { display: false, drawBorder: false },
+        border: { display: false },
+        ticks: {
+          color: () => {
+            return getCssVar('--text');
+          },
+          font: { size: 14, weight: 'bold' },
+        },
+      },
+      y: {
+        beginAtZero: true,
+        grid: { display: true, drawBorder: false },
+        ticks: {
+          color: () => {
+            return getCssVar('--text');
+          },
+          stepSize: 280,
+          font: { size: 14, weight: 'bold' },
+          display: false,
+        },
+        border: { display: false },
+      },
+    },
+  };
+
   return (
-    <div className="h-full pb-10! bg-card-bg">
+    <div className="h-full pb-6 bg-card-bg">
       <Bar options={barOptions} data={barData} plugins={[topLabelPlugin]} />
     </div>
   );
