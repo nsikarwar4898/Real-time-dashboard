@@ -16,20 +16,20 @@ export default function SubHeader({
   onRefresh,
 }: Props) {
   return (
-    <div className="flex items-center justify-between px-3 py-3 bg-background">
-      <h1 className="text-2xl text-title font-bold">Dashboard</h1>
+    <div className="flex  flex-col md:flex-row items-center justify-between px-3 py-3 bg-background">
+      <h1 className="text-2xl text-title flex justify-start pl-4 md:pl-1 w-full   font-bold">Dashboard</h1>
 
-      <div className="flex items-center gap-2 text-sm text-title">
+      <div className="flex items-center w-full justify-around md:justify-end gap-2 text-sm text-title">
         <span>Last updated {lastUpdated}</span>
 
         <button
           onClick={onToggleAutoFetch}
-          className="flex items-center gap-1 px-2 py-1 text-sm border border-border rounded "
+          className="flex items-center gap-1 px-2 py-1 text-sm border border-border rounded-lg  bg-card-bg"
         >
           {autoFetchEnabled ? (
             <>
               <FiPause className="w-4 h-4" />
-              Pause auto-fetch
+              <p className="text-sm md:text-nowrap">Pause auto-fetch</p>
             </>
           ) : (
             <>
@@ -39,10 +39,7 @@ export default function SubHeader({
           )}
         </button>
 
-        <button
-          onClick={onRefresh}
-          className="p-2 border border-border rounded "
-        >
+        <button onClick={onRefresh} className="p-2 border border-border bg-card-bg rounded-lg ">
           <FiRefreshCw className="w-4 h-4" />
         </button>
       </div>

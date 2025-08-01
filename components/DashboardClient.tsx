@@ -120,14 +120,14 @@ export default function DashboardClient({ initialData }: Props) {
       >
         <div
           key="summary"
-          className="h-full overflow-hidden bg-card-bg border border-border rounded p-4"
+          className="h-full overflow-hidden bg-card-bg border rounded-2xl border-border  p-4"
         >
           {loading ? <SummarySkeleton /> : <Summary />}
         </div>
 
         <div
           key="orders"
-          className="h-full overflow-hidden bg-card-bg border border-border rounded flex flex-col"
+          className="h-full overflow-hidden bg-card-bg border border-border rounded-2xl flex flex-col"
         >
           {loading ? (
             <SummarySkeleton />
@@ -145,7 +145,7 @@ export default function DashboardClient({ initialData }: Props) {
 
         <div
           key="topProducts"
-          className="h-full overflow-hidden bg-card-bg border border-border rounded flex flex-col"
+          className="h-full overflow-hidden bg-card-bg border border-border rounded-2xl flex flex-col"
         >
           {!firstLoad ? (
             <SummarySkeleton />
@@ -153,7 +153,9 @@ export default function DashboardClient({ initialData }: Props) {
             <SummarySkeleton />
           ) : (
             <>
-              <div className="text-sm text-title p-2 border-b border-border">Top Products</div>
+              <div className="text-sm text-title p-2 border-b border-border flex items-center">
+                Top Products
+              </div>
               <div className="flex-1 p-2">
                 <BarChart />
               </div>
@@ -163,7 +165,7 @@ export default function DashboardClient({ initialData }: Props) {
 
         <div
           key="salesChart"
-          className="h-full overflow-hidden bg-card-bg border border-border rounded flex flex-col"
+          className="h-full overflow-hidden bg-card-bg border border-border rounded-2xl flex flex-col"
         >
           {!firstLoad ? (
             <SummarySkeleton />
@@ -171,7 +173,7 @@ export default function DashboardClient({ initialData }: Props) {
             <SummarySkeleton />
           ) : (
             <>
-              <div className="text-sm text-title font-medium px-4 py-2 border-b border-border">
+              <div className="text-sm text-title font-medium flex items-end px-4 pt-3 pb-3 border-b border-border">
                 Sales Chart
               </div>
               <div className="flex-1 p-4">
@@ -183,14 +185,14 @@ export default function DashboardClient({ initialData }: Props) {
 
         <div
           key="payments"
-          className="h-full overflow-hidden bg-card-bg border border-border rounded p-4"
+          className="h-full overflow-hidden bg-card-bg border border-border rounded-2xl p-4"
         >
           {loading ? <SummarySkeleton /> : <PaymentsTable />}
         </div>
 
         <div
           key="locations"
-          className="h-full overflow-hidden bg-card-bg border border-border rounded-xl flex flex-col "
+          className="h-full overflow-hidden bg-card-bg border border-border rounded-2xl flex flex-col "
         >
           {loading ? (
             <SummarySkeleton />

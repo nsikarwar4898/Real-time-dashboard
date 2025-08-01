@@ -1,5 +1,5 @@
 const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'];
-const fixedData = [20, 45, 32, 60, 38, 75];
+const fixedData = [20, 45, 32, 60, 38, 65];
 
 export const barData = {
   labels: months,
