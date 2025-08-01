@@ -48,7 +48,7 @@ export default function PaymentsTable() {
 
   return (
     <div className="bg-card-bg rounded ">
-      <div className="text-sm text-title font-medium px-4 py-2 border-b border-border rounded-t">
+      <div className="text-sm text-title font-medium px-4 py-1 flex items-center  border-b border-border rounded-t">
         Payments history
       </div>
 

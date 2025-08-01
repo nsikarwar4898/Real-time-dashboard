@@ -29,7 +29,7 @@ export default function Header({ editMode, onToggleEditMode, onReset }: Props) {
           />
           <div className="w-11 h-6 text-text bg-toggle border-border rounded-full relative transition-colors duration-300">
             <div
-              className="absolute left-1 top-1 w-4 h-4 bg-background  rounded-full transition-transform duration-300"
+              className="absolute left-1 top-1 w-4 h-4 bg-button  rounded-full transition-transform duration-300"
               style={{ transform: editMode ? 'translateX(20px)' : 'translateX(0)' }}
             />
           </div>

@@ -3,11 +3,11 @@
 export default function Summary() {
   return (
     <div className="bg-card-bg">
-      <div className="text-sm text-title font-medium px-3 py-3 border-b border-border rounded-t">
+      <div className="text-sm text-title font-medium px-3 flex items-center h-6 pb-4 border-b border-border rounded-t">
         Summary
       </div>
 
-      <div className="divide-y divide-border text-sm">
+      <div className="divide-y divide-border text-sm mt-3">
         <div className="px-4 py-2">
           <div className="text-text">Total sales</div>
           <div className="text-lg text-title font-semibold">

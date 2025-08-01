@@ -8,7 +8,7 @@ const SkeletonBlock = ({ height = 'h-6', width = 'w-full' }: SkeletonBlockProps)
 );
 
 export const SummarySkeleton = () => (
-  <div className="space-y-2 ">
+  <div className="space-y-10 pt-2 flex px-4 flex-col items-start  h-full">
     <SkeletonBlock width="w-1/2" height="h-10" />
     <SkeletonBlock width="w-full" height="h-15" />
     <SkeletonBlock width="w-full" height="h-15" />
