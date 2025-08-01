@@ -87,8 +87,6 @@ export default function DashboardClient({ initialData }: Props) {
     localStorage.removeItem('dashboardLayout');
   };
 
-  console.log(window.theme_loaded, 'this is the window object');
-
   return (
     <div className="p-4">
       <Header

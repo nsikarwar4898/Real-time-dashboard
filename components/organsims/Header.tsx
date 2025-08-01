@@ -20,16 +20,16 @@ export default function Header({ editMode, onToggleEditMode, onReset }: Props) {
           Reset to default
         </button>
 
-        <label className="inline-flex items-center cursor-pointer">
+        <label className="inline-flex items-center cursor-pointer border-border">
           <input
             type="checkbox"
             className="sr-only peer"
             checked={editMode}
             onChange={onToggleEditMode}
           />
-          <div className="w-11 h-6 text-text bg-card-bg rounded-full relative transition-colors duration-300">
+          <div className="w-11 h-6 text-text bg-toggle border-border rounded-full relative transition-colors duration-300">
             <div
-              className="absolute left-1 top-1 w-4 h-4 bg-background rounded-full transition-transform duration-300"
+              className="absolute left-1 top-1 w-4 h-4 bg-background  rounded-full transition-transform duration-300"
               style={{ transform: editMode ? 'translateX(20px)' : 'translateX(0)' }}
             />
           </div>
@@ -43,8 +43,8 @@ export default function Header({ editMode, onToggleEditMode, onReset }: Props) {
         </span>
       </div>
 
-      <button className="p-2 hover:bg-gray-100 rounded">
-        <HiSun className="w-5 h-5 text-gray-600" />
+      <button className="p-2 hover:bg-background rounded">
+        <HiSun className="w-5 h-5 text-title" />
       </button>
     </header>
   );

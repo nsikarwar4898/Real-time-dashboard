@@ -17,6 +17,7 @@ export async function GET(request: Request) {
       'linegradient-under-from': '#93d5f5',
       'linegradient-under-to': '#ebf5fa',
       'card-bg': 'white',
+      toggle: '#10B981',
     },
     dark: {
       background: '#6b6f71',
@@ -31,6 +32,7 @@ export async function GET(request: Request) {
       'linegradient-under-from': '#40b1e9',
       'linegradient-under-to': '#c4ebff',
       'card-bg': '#181b1c',
+      toggle: '#10B981',
     },
   };
 
