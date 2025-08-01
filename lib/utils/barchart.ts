@@ -32,7 +32,8 @@ export const topLabelPlugin = {
       const meta = chart.getDatasetMeta(i);
       meta.data.forEach((bar: any, index: number) => {
         const value = dataset.data[index];
-        ctx.fillStyle = '#000';
+        const styles = getCssVar('--text');
+        ctx.fillStyle = styles;
         ctx.font = 'bold 12px sans-serif';
         ctx.textAlign = 'center';
         ctx.fillText(value, bar.x, bar.y - 8);
@@ -56,6 +57,9 @@ export const barOptions = {
       grid: { display: false, drawBorder: false },
       border: { display: false },
       ticks: {
+        color: () => {
+          return getCssVar('--text');
+        },
         font: {
           size: 14,
           weight: 'bold',
@@ -66,6 +70,9 @@ export const barOptions = {
       beginAtZero: true,
       grid: { display: true, drawBorder: false },
       ticks: {
+        color: () => {
+          return getCssVar('--text');
+        },
         stepSize: 20,
         font: {
           size: 14,

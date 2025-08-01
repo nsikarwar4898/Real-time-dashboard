@@ -43,6 +43,7 @@ export default function DashboardClient({ initialData }: Props) {
   const [autoFetchEnabled, setAutoFetchEnabled] = useState(true);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
   const [lastUpdated, setLastUpdated] = useState('just now');
+  const [firstLoad, setFirstLoad] = useState(false);
 
   const fetchData = async () => {
     try {
@@ -55,7 +56,7 @@ export default function DashboardClient({ initialData }: Props) {
     } catch (err) {
       console.error('Fetch error:', err);
     }
-    if (!window.theme_loaded) window.theme_loaded = true;
+
     setLoading(false);
   };
 
@@ -68,10 +69,16 @@ export default function DashboardClient({ initialData }: Props) {
       }
     }
 
-    if (window.theme_loaded) window.theme_loaded = false;
+    const intervalId = setInterval(() => {
+      if (window.theme_loaded === true) {
+        setFirstLoad(true);
+        clearInterval(intervalId);
+      }
+    }, 50);
 
     return () => {
       if (intervalRef.current) clearInterval(intervalRef.current);
+      clearInterval(intervalId);
     };
   }, [autoFetchEnabled]);
 
@@ -79,6 +86,9 @@ export default function DashboardClient({ initialData }: Props) {
     setLayout(defaultLayouts);
     localStorage.removeItem('dashboardLayout');
   };
+
+  console.log(window.theme_loaded, 'this is the window object');
+
   return (
     <div className="p-4">
       <Header
@@ -110,57 +120,88 @@ export default function DashboardClient({ initialData }: Props) {
           localStorage.setItem('dashboardLayout', JSON.stringify(allLayouts));
         }}
       >
-        <div key="summary" className={`border border-border  bg-card-bg rounded ${loading && 'p-4'}`}>
+        <div
+          key="summary"
+          className="h-full overflow-hidden bg-card-bg border border-border rounded p-4"
+        >
           {loading ? <SummarySkeleton /> : <Summary />}
         </div>
-        <div key="orders" className={`border border-border bg-card-bg rounded  ${loading && 'p-4'}`}>
-          {loading && !window.theme_loaded ? (
+
+        <div
+          key="orders"
+          className="h-full overflow-hidden bg-card-bg border border-border rounded flex flex-col"
+        >
+          {loading ? (
+            <SummarySkeleton />
+          ) : !firstLoad ? (
             <SummarySkeleton />
           ) : (
             <>
-              <div className="text-sm text-title p-2 border border-border bg-card-bg rounded">
-                Orders
+              <div className="text-sm text-title p-2 border-b border-border">Orders</div>
+              <div className="flex-1 p-2">
+                <HorizontalBarChart />
               </div>
-              <HorizontalBarChart />
             </>
           )}
         </div>
-        <div key="topProducts" className={`border border-gray-300 rounded ${loading && 'p-4'}`}>
-          {loading && !window.theme_loaded ? (
+
+        <div
+          key="topProducts"
+          className="h-full overflow-hidden bg-card-bg border border-border rounded flex flex-col"
+        >
+          {!firstLoad ? (
+            <SummarySkeleton />
+          ) : loading ? (
             <SummarySkeleton />
           ) : (
             <>
-              <div className="text-sm text-title bg-card-bg p-2">Top products</div>
-              <BarChart />
+              <div className="text-sm text-title p-2 border-b border-border">Top Products</div>
+              <div className="flex-1 p-2">
+                <BarChart />
+              </div>
             </>
           )}
         </div>
-        <div key="salesChart" className={`border border-gray-300 rounded ${loading && 'p-4'}`}>
-          {loading && !window.theme_loaded ? (
+
+        <div
+          key="salesChart"
+          className="h-full overflow-hidden bg-card-bg border border-border rounded flex flex-col"
+        >
+          {!firstLoad ? (
+            <SummarySkeleton />
+          ) : loading ? (
             <SummarySkeleton />
           ) : (
             <>
-              <div className="text-sm text-title font-medium px-4 py-2 border-b border-border bg-card-bg rounded-t">
+              <div className="text-sm text-title font-medium px-4 py-2 border-b border-border">
                 Sales Chart
               </div>
-              <div className="p-4 bg-card-bg">
+              <div className="flex-1 p-4">
                 <LineChart />
               </div>
             </>
           )}
         </div>
-        <div key="payments" className={`border border-gray-300 rounded ${loading && 'p-4'}`}>
+
+        <div
+          key="payments"
+          className="h-full overflow-hidden bg-card-bg border border-border rounded p-4"
+        >
           {loading ? <SummarySkeleton /> : <PaymentsTable />}
         </div>
-        <div key="locations" className={`border border-gray-300 rounded ${loading && 'p-4'}`}>
+
+        <div
+          key="locations"
+          className="h-full overflow-hidden bg-card-bg border border-border rounded-xl flex flex-col "
+        >
           {loading ? (
             <SummarySkeleton />
           ) : (
             <>
-              <div className="text-sm  bg-card-bg text-title font-medium px-4 py-2 border-b border-border rounded-t">
+              <div className="text-sm text-title font-medium px-4 py-2 border-b border-border">
                 Locations
               </div>
-              <div className="p-4 bg-card-bg">
+              <div className="flex-1 p-4 rounded-xl">
                 <Map locations={data.data.dashboardData.map.locations} />
               </div>
             </>

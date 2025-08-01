@@ -11,7 +11,7 @@ type Props = {
 
 export default function Header({ editMode, onToggleEditMode, onReset }: Props) {
   return (
-    <header className="flex items-center justify-between px-2 py-2 border-b border-border mb-1 bg-background">
+    <header className="flex items-center justify-between px-2 py-2 border-b border-border mb-1 bg-card-bg rounded-xl h-24">
       <div className="flex items-center gap-3">
         <button
           onClick={onReset}
