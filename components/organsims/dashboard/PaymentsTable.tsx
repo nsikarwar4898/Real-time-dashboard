@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { faker } from '@faker-js/faker';
+import dynamic from 'next/dynamic';
 
 interface Transaction {
   id: number;
@@ -13,6 +13,8 @@ interface Transaction {
 interface paymentProps {
   data: Transaction[];
 }
+
+const PaymentsTableRow = dynamic(() => import('./PaymentsTableRow'), { ssr: false });
 
 export default function PaymentsTable({ data }: paymentProps) {
   const [currentPage, setCurrentPage] = useState(1);
@@ -59,15 +61,7 @@ export default function PaymentsTable({ data }: paymentProps) {
             </thead>
             <tbody>
               {currentItems.map(payment => (
-                <tr key={payment.id} className="border-b border-border text-text">
-                  <td className="p-2">
-                    <input type="checkbox" />
-                  </td>
-                  <td className="p-2">{faker.datatype.boolean() ? 'success' : 'failure'}</td>
-                  <td className="p-2">{payment.user}@yahoo.com</td>
-                  <td className="p-2">${payment.amount}</td>
-                  <td className="p-2">${payment.amount}</td>
-                </tr>
+                <PaymentsTableRow key={payment.id} payment={payment} />
               ))}
             </tbody>
           </table>
