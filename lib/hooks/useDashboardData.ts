@@ -30,6 +30,7 @@ export function useDashboardData(initialData: DashboardApiResponse) {
       const res = await fetch('/api/dashboard');
       if (!res.ok) throw new Error('Failed to fetch');
       const newData = await res.json();
+      console.log('this is newData', newData);
       setData(newData);
       setLastUpdated(new Date().toLocaleTimeString());
     } catch (err) {

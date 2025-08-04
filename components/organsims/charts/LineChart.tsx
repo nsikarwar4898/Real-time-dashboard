@@ -12,8 +12,8 @@ import {
   Filler,
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
-import type { ScriptableContext } from 'chart.js';
-import type { ChartOptions } from 'chart.js';
+import type { ScriptableContext, ChartOptions } from 'chart.js';
+
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -26,33 +26,33 @@ ChartJS.register(
 );
 
 interface SalesOverTime {
-  labels: string[]; // e.g., ['2025-08-01', '2025-07-31', ...]
-  data: number[]; // e.g., [105, 165, 50, ...]
+  labels: string[];
+  data: number[];
 }
 
-export default function LineChart({ data, labels }: SalesOverTime) {
-  const lineLabels = labels.map(label => label.split('-')[2]).reverse();
-  const lineSales = data.map(item => item).reverse();
-  // const lineSales2 = [100, 300, 400, 250, 500, 650];
+export default function LineChart({ labels, data }: SalesOverTime) {
+  const reversedLabels = [...labels].reverse();
+  const reversedData = [...data].reverse();
 
   const lineData = {
-    labels: lineLabels,
+    labels: reversedLabels.map(label => {
+      const date = new Date(label);
+      return date.toISOString(); // Keep original ISO for matching later
+    }),
     datasets: [
       {
         label: 'Monthly Sales',
-        data: lineSales,
+        data: reversedData,
         fill: true,
         borderColor: '#07557C',
         backgroundColor: (ctx: ScriptableContext<'line'>) => {
-          const from = getCssVar('--linegradient-from')?.trim();
-          const to = getCssVar('--linegradient-to')?.trim();
+          const from = getCssVar('--linegradient-from');
+          const to = getCssVar('--linegradient-to');
 
           if (!from || !to) {
-            console.warn('Line gradient colors not available, returning transparent');
+            console.warn('Missing gradient colors');
             return 'transparent';
           }
-
-          console.log(from, to, 'this is from to');
 
           const gradient = ctx.chart.ctx.createLinearGradient(0, 0, 0, 300);
           gradient.addColorStop(0, from);
@@ -73,61 +73,69 @@ export default function LineChart({ data, labels }: SalesOverTime) {
     responsive: true,
     maintainAspectRatio: false,
     plugins: {
-      legend: {
-        display: false,
-        position: 'top' as const,
-      },
-      title: {
-        display: false,
-        text: 'Sales Trend (Jan - Jun)',
-      },
+      legend: { display: false },
+      title: { display: false },
     },
     scales: {
       x: {
         type: 'category',
-        grid: {
-          display: false,
-        },
-        border: {
-          display: false,
-        },
+        grid: { display: false },
+        border: { display: false },
         ticks: {
-          color: () => {
-            return getCssVar('--text');
-          },
+          color: () => getCssVar('--text'),
           font: {
-            size: 14,
-            weight: 'bold' as const,
+            size: 12,
+            weight: 'bold',
+          },
+          autoSkip: false,
+          callback: function (_, index, ticks) {
+            const total = ticks.length;
+            const isFirst = index === 0;
+            const isLast = index === total - 1;
+            const isMiddle = index === Math.floor(total / 2);
+
+            const date = new Date(reversedLabels[index]);
+            const day = date.getDate().toString().padStart(2, '0');
+            const month = date.toLocaleString('default', { month: 'short' });
+
+            if (isFirst || isMiddle || isLast) {
+              return `${month} ${day}`;
+            }
+            return `${day}`;
           },
         },
       },
       y: {
         type: 'linear',
-        grid: {
-          display: false,
-        },
+        grid: { display: false },
+        border: { display: false },
         min: 0,
-        max: 300,
+        suggestedMax: Math.max(...data) + 50,
         ticks: {
-          color: () => {
-            return getCssVar('--text');
-          },
-          stepSize: 200,
+          color: () => getCssVar('--text'),
+          stepSize: 100,
           font: {
             size: 14,
-            weight: 'bold' as const,
+            weight: 'bold',
           },
-        },
-        border: {
-          display: false,
         },
       },
     },
   };
 
+  const currentMonthYear = new Date().toLocaleString('default', {
+    month: 'long',
+    year: 'numeric',
+  });
+
   return (
-    <div className="h-[350px] bg-card-bg">
-      <Line data={lineData} options={lineOptions} />
+    <div className="h-[350px] bg-card-bg flex flex-col">
+      <div className="flex-1">
+        <Line data={lineData} options={lineOptions} />
+      </div>
+      <div className="text-xs text-title text-center py-1 border-t border-border">
+        {currentMonthYear}
+      </div>
     </div>
   );
 }
