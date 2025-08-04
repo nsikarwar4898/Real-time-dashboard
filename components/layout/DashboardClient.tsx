@@ -98,10 +98,7 @@ export default function DashboardClient({ initialData }: Props) {
           />
         </div>
 
-        <div
-          key="locations"
-          className="h-full overflow-hidden bg-card-bg border border-border rounded-2xl flex flex-col "
-        >
+        <div key="locations">
           <DashboardLocations loading={loading} locations={data.data.dashboardData.map.locations} />
         </div>
       </ResponsiveGridLayout>

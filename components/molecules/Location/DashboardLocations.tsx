@@ -12,9 +12,8 @@ type DashboardLocationsProps = {
 };
 
 export default function DashboardLocations({ loading, locations }: DashboardLocationsProps) {
-  console.log(locations);
   return (
-    <>
+    <div className="h-full overflow-hidden bg-card-bg border border-border rounded-2xl flex flex-col">
       {loading ? (
         <SummarySkeleton />
       ) : (
@@ -27,6 +26,6 @@ export default function DashboardLocations({ loading, locations }: DashboardLoca
           </div>
         </>
       )}
-    </>
+    </div>
   );
 }
