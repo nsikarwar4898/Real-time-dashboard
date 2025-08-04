@@ -3,10 +3,15 @@
 import { SummarySkeleton } from '@/components/organsims/DashboardSkeleton';
 import BarChart from '@/components/organsims/BarChart';
 
+type TopProduct = {
+  id: string;
+  name: string;
+  sales: number;
+};
 type DashboardTopProductsProps = {
   loading: boolean;
   initialLoad: boolean;
-  topProductsData: any; // Replace `any` with the proper type if defined
+  topProductsData: TopProduct[];
 };
 
 export default function DashboardTopProducts({

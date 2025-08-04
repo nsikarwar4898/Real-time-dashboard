@@ -3,10 +3,15 @@
 import { SummarySkeleton } from '@/components/organsims/DashboardSkeleton';
 import HorizontalBarChart from '@/components/organsims/HorizontalChart';
 
+type UserEngagementChartData = {
+  labels: string[];
+  data: number[];
+};
+
 type DashboardOrdersProps = {
   loading: boolean;
   initialLoad: boolean;
-  userEngagementData: any;
+  userEngagementData: UserEngagementChartData;
 };
 
 export default function DashboardOrders({
