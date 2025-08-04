@@ -1,8 +1,8 @@
 'use client';
 
-import { useEffect, useState, useRef } from 'react';
+import { useState } from 'react';
 import { DashboardApiResponse } from '@/lib/types/types';
-import { Responsive, WidthProvider, Layouts } from 'react-grid-layout';
+import { Responsive, WidthProvider } from 'react-grid-layout';
 import 'react-grid-layout/css/styles.css';
 import 'react-resizable/css/styles.css';
 import { SummarySkeleton } from '../organsims/DashboardSkeleton';
@@ -12,8 +12,8 @@ import SubHeader from '../organsims/SubHeader';
 import Header from '../organsims/Header';
 import BarChart from '../organsims/BarChart';
 import HorizontalBarChart from '../organsims/HorizontalChart';
-import { defaultLayouts } from '@/lib/utils/gridLayout';
 import dynamic from 'next/dynamic';
+import { useDashboardData } from '@/lib/hooks/useDashboardData';
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
@@ -24,77 +24,26 @@ const Map = dynamic(() => import('../organsims/Map'), { ssr: false });
 const LineChart = dynamic(() => import('../organsims/LineChart'), { ssr: false });
 
 export default function DashboardClient({ initialData }: Props) {
-  const [data, setData] = useState(initialData);
-  const [loading, setLoading] = useState(false);
+  const {
+    data,
+    layout,
+    loading,
+    initialLoad,
+    lastUpdated,
+    autoFetchEnabled,
+    fetchData,
+    resetLayout,
+    setAutoFetchEnabled,
+    handleLayoutChange,
+  } = useDashboardData(initialData);
   const [editMode, setEditMode] = useState(false);
-  const [layout, setLayout] = useState<Layouts>(() => {
-    if (typeof window !== 'undefined') {
-      const saved = localStorage.getItem('dashboardLayout');
-      if (saved) {
-        try {
-          return JSON.parse(saved) as Layouts;
-        } catch (e) {
-          console.error('Invalid saved layout:', e);
-        }
-      }
-    }
-    return defaultLayouts;
-  });
-  const [autoFetchEnabled, setAutoFetchEnabled] = useState(true);
-  const intervalRef = useRef<NodeJS.Timeout | null>(null);
-  const [lastUpdated, setLastUpdated] = useState('just now');
-  const [firstLoad, setFirstLoad] = useState(false);
-
-  const fetchData = async () => {
-    try {
-      setLoading(true);
-      const res = await fetch('/api/dashboard');
-      if (!res.ok) throw new Error('Failed to fetch');
-      const newData = await res.json();
-
-      console.log(newData, 'this is new data');
-      setData(newData);
-      setLastUpdated(new Date().toLocaleTimeString());
-    } catch (err) {
-      console.error('Fetch error:', err);
-    }
-
-    setLoading(false);
-  };
-
-  useEffect(() => {
-    if (autoFetchEnabled) {
-      intervalRef.current = setInterval(fetchData, 20000);
-    } else {
-      if (intervalRef.current) {
-        clearInterval(intervalRef.current);
-      }
-    }
-
-    const intervalId = setInterval(() => {
-      if (window.theme_loaded === true) {
-        setFirstLoad(true);
-        clearInterval(intervalId);
-      }
-    }, 50);
-
-    return () => {
-      if (intervalRef.current) clearInterval(intervalRef.current);
-      clearInterval(intervalId);
-    };
-  }, [autoFetchEnabled]);
-
-  const handleResetLayout = () => {
-    setLayout(defaultLayouts);
-    localStorage.removeItem('dashboardLayout');
-  };
 
   return (
     <div className="p-4">
       <Header
         editMode={editMode}
         onToggleEditMode={() => setEditMode(prev => !prev)}
-        onReset={handleResetLayout}
+        onReset={resetLayout}
       />
 
       <SubHeader
@@ -115,10 +64,7 @@ export default function DashboardClient({ initialData }: Props) {
         containerPadding={[0, 0]}
         margin={[10, 10]}
         useCSSTransforms={true}
-        onLayoutChange={(layout, allLayouts) => {
-          setLayout(allLayouts);
-          localStorage.setItem('dashboardLayout', JSON.stringify(allLayouts));
-        }}
+        onLayoutChange={handleLayoutChange}
       >
         <div
           key="summary"
@@ -133,7 +79,7 @@ export default function DashboardClient({ initialData }: Props) {
         >
           {loading ? (
             <SummarySkeleton />
-          ) : !firstLoad ? (
+          ) : !initialLoad ? (
             <SummarySkeleton />
           ) : (
             <>
@@ -149,7 +95,7 @@ export default function DashboardClient({ initialData }: Props) {
           key="topProducts"
           className="h-full overflow-hidden bg-card-bg border border-border rounded-2xl flex flex-col"
         >
-          {!firstLoad ? (
+          {!initialLoad ? (
             <SummarySkeleton />
           ) : loading ? (
             <SummarySkeleton />
@@ -169,7 +115,7 @@ export default function DashboardClient({ initialData }: Props) {
           key="salesChart"
           className="h-full overflow-hidden bg-card-bg border border-border rounded-2xl flex flex-col"
         >
-          {!firstLoad ? (
+          {!initialLoad ? (
             <SummarySkeleton />
           ) : loading ? (
             <SummarySkeleton />
