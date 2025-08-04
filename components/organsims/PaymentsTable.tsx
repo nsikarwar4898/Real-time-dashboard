@@ -1,5 +1,7 @@
 'use client';
 
+import { faker } from '@faker-js/faker';
+
 interface Transaction {
   id: number;
   user: string;
@@ -12,51 +14,6 @@ interface paymentProps {
 }
 
 export default function PaymentsTable({ data }: paymentProps) {
-  const payments = [
-    {
-      id: '1',
-      status: 'Success',
-      email: 'ken99@yahoo.com',
-      amount: 316,
-      totalNet: 316,
-    },
-    {
-      id: '2',
-      status: 'Success',
-      email: 'ken99@yahoo.com',
-      amount: 316,
-      totalNet: 316,
-    },
-    {
-      id: '3',
-      status: 'Success',
-      email: 'ken99@yahoo.com',
-      amount: 316,
-      totalNet: 316,
-    },
-    {
-      id: '4',
-      status: 'Success',
-      email: 'ken99@yahoo.com',
-      amount: 316,
-      totalNet: 316,
-    },
-    {
-      id: '5',
-      status: 'Success',
-      email: 'ken99@yahoo.com',
-      amount: 316,
-      totalNet: 316,
-    },
-    {
-      id: '6',
-      status: 'Success',
-      email: 'ken99@yahoo.com',
-      amount: 316,
-      totalNet: 316,
-    },
-  ];
-
   return (
     <div className="bg-card-bg rounded ">
       <div className="text-sm text-title font-medium px-4 py-1 flex items-center  border-b border-border rounded-t">
@@ -97,7 +54,7 @@ export default function PaymentsTable({ data }: paymentProps) {
                 <td className="p-2">
                   <input type="checkbox" />
                 </td>
-                <td className="p-2">success</td>
+                <td className="p-2">{faker.datatype.boolean() ? 'success' : 'failure'}</td>
                 <td className="p-2">{payment.user}@yahoo.com</td>
                 <td className="p-2">${payment.amount}</td>
                 <td className="p-2">${payment.amount}</td>

@@ -11,6 +11,7 @@
     "format:check": "prettier --check ."
   },
   "dependencies": {
+    "@faker-js/faker": "^9.9.0",
     "chart.js": "^4.5.0",
     "leaflet": "^1.9.4",
     "next": "15.4.5",
