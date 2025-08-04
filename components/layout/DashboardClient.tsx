@@ -8,12 +8,14 @@ import 'react-resizable/css/styles.css';
 import SubHeader from '../organsims/SubHeader';
 import Header from '../organsims/Header';
 import { useDashboardData } from '@/lib/hooks/useDashboardData';
-import DashboardLocations from '../molecules/Location/DashboardLocations';
-import DashboardSummary from '../molecules/Summary/DashboardSummary';
-import DashboardOrders from '../molecules/Orders/DashboardOrders';
-import DashboardTopProducts from '../molecules/TopProducts/DashboardTopProducts';
-import DashboardSalesChart from '../molecules/SalesChart/DashboardSalesChart';
-import DashboardPayments from '../molecules/Payments/DashboardPayments';
+import {
+  DashboardLocations,
+  DashboardOrders,
+  DashboardPayments,
+  DashboardSalesChart,
+  DashboardSummary,
+  DashboardTopProducts,
+} from '../molecules';
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
