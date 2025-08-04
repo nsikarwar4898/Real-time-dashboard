@@ -5,8 +5,6 @@ import { DashboardApiResponse } from '@/lib/types/types';
 import { Responsive, WidthProvider } from 'react-grid-layout';
 import 'react-grid-layout/css/styles.css';
 import 'react-resizable/css/styles.css';
-import { SummarySkeleton } from '../organsims/DashboardSkeleton';
-import PaymentsTable from '../organsims/PaymentsTable';
 import SubHeader from '../organsims/SubHeader';
 import Header from '../organsims/Header';
 import { useDashboardData } from '@/lib/hooks/useDashboardData';
@@ -15,6 +13,7 @@ import DashboardSummary from '../molecules/Summary/DashboardSummary';
 import DashboardOrders from '../molecules/Orders/DashboardOrders';
 import DashboardTopProducts from '../molecules/TopProducts/DashboardTopProducts';
 import DashboardSalesChart from '../molecules/SalesChart/DashboardSalesChart';
+import DashboardPayments from '../molecules/Payments/DashboardPayments';
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
@@ -92,15 +91,11 @@ export default function DashboardClient({ initialData }: Props) {
           />
         </div>
 
-        <div
-          key="payments"
-          className="h-full overflow-hidden bg-card-bg border border-border rounded-2xl p-4"
-        >
-          {loading ? (
-            <SummarySkeleton />
-          ) : (
-            <PaymentsTable data={data.data.dashboardData.tables.recentTransactions} />
-          )}
+        <div key="payments">
+          <DashboardPayments
+            loading={loading}
+            data={data.data.dashboardData.tables.recentTransactions}
+          />
         </div>
 
         <div

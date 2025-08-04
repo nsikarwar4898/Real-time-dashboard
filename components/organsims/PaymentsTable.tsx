@@ -29,7 +29,6 @@ export default function PaymentsTable({ data }: paymentProps) {
       </div>
 
       <div className="px-4 flex flex-col items-center justify-between  h-96 w-full">
-       
         <div className="flex items-center justify-between w-full py-2 rounded">
           <input
             type="text"
@@ -45,7 +44,6 @@ export default function PaymentsTable({ data }: paymentProps) {
           </select>
         </div>
 
-       
         <table className="w-full text-sm border-collapse">
           <thead className="text-left text-title bg-card-bg border-b border-border">
             <tr>
@@ -73,7 +71,6 @@ export default function PaymentsTable({ data }: paymentProps) {
           </tbody>
         </table>
 
-       
         <div className="flex items-end  justify-between py-3 text-sm text-title w-full">
           <span>
             {startIndex + 1} - {Math.min(startIndex + itemsPerPage, data.length)} of {data.length}{' '}
