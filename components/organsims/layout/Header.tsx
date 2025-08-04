@@ -1,7 +1,7 @@
 'use client';
 
+import Logo from '@/components/icons/Logo';
 import { HiSun } from 'react-icons/hi';
-import Logo from '../icons/Logo';
 
 type Props = {
   editMode: boolean;
@@ -11,7 +11,7 @@ type Props = {
 
 export default function Header({ editMode, onToggleEditMode, onReset }: Props) {
   return (
-    <header className="flex items-center justify-between px-2 py-2 border-b border-border mb-1 bg-card-bg rounded-xl h-24">
+    <header className="flex items-center justify-between px-2 py-2 border-b border-border mb-1 bg-card-bg h-20">
       <div className="flex items-center gap-3">
         <button
           onClick={onReset}
@@ -38,7 +38,7 @@ export default function Header({ editMode, onToggleEditMode, onReset }: Props) {
       </div>
 
       <div className="flex items-center gap-2">
-        <span className="text-blue-800 font-semibold text-lg flex items-center gap-1">
+        <span className="text-blue-800 font-semibold text-xl flex items-center gap-1">
           <Logo /> acme
         </span>
       </div>

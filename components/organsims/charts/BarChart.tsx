@@ -10,11 +10,10 @@ import {
   Legend,
 } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
-import { useEffect, useState } from 'react';
+import type { Chart } from 'chart.js';
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
-// ✅ Fix props: it should be `data: barChartProps[]`
 interface BarChartProps {
   data: {
     id: string;
@@ -48,16 +47,18 @@ export default function BarChart({ data }: BarChartProps) {
 
   const topLabelPlugin = {
     id: 'topLabelPlugin',
-    afterDatasetsDraw(chart: any) {
+    afterDatasetsDraw(chart: Chart<'bar'>) {
       const { ctx } = chart;
-      chart.data.datasets.forEach((dataset: any, i: number) => {
+
+      chart.data.datasets.forEach((dataset, i) => {
         const meta = chart.getDatasetMeta(i);
-        meta.data.forEach((bar: any, index: number) => {
-          const value = dataset.data[index];
+
+        meta.data.forEach((bar, index) => {
+          const value = (dataset.data as number[])[index];
           ctx.fillStyle = getCssVar('--text');
           ctx.font = 'bold 12px sans-serif';
           ctx.textAlign = 'center';
-          ctx.fillText(value, bar.x, bar.y - 8);
+          ctx.fillText(String(value), bar.x, bar.y - 8);
         });
       });
     },
@@ -81,7 +82,7 @@ export default function BarChart({ data }: BarChartProps) {
           color: () => {
             return getCssVar('--text');
           },
-          font: { size: 14, weight: 'bold' },
+          font: { size: 14, weight: 'bold' as const },
         },
       },
       y: {
@@ -92,7 +93,7 @@ export default function BarChart({ data }: BarChartProps) {
             return getCssVar('--text');
           },
           stepSize: 280,
-          font: { size: 14, weight: 'bold' },
+          font: { size: 14, weight: 'bold' as const },
           display: false,
         },
         border: { display: false },

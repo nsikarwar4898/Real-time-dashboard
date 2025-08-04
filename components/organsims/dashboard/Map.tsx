@@ -16,7 +16,7 @@ import {
 } from '@/lib/utils/coordinates';
 import { Location } from '@/lib/types/types';
 
-delete (L.Icon.Default.prototype as any)._getIconUrl;
+delete (L.Icon.Default.prototype as unknown as { _getIconUrl: unknown })._getIconUrl;
 L.Icon.Default.mergeOptions({
   iconRetinaUrl: markerIcon2x.src,
   iconUrl: markerIcon.src,

@@ -1,10 +1,10 @@
 'use client';
 
-import { SummarySkeleton } from '@/components/organsims/DashboardSkeleton';
+import { SummarySkeleton } from '@/components/organsims';
 import { Location } from '@/lib/types/types';
 import dynamic from 'next/dynamic';
 
-const Map = dynamic(() => import('@/components/organsims/Map'), { ssr: false });
+const Map = dynamic(() => import('@/components/organsims/dashboard/Map'), { ssr: false });
 
 type DashboardLocationsProps = {
   loading: boolean;
@@ -12,9 +12,8 @@ type DashboardLocationsProps = {
 };
 
 export default function DashboardLocations({ loading, locations }: DashboardLocationsProps) {
-  console.log(locations);
   return (
-    <>
+    <div className="h-full overflow-hidden bg-card-bg border border-border rounded-2xl flex flex-col">
       {loading ? (
         <SummarySkeleton />
       ) : (
@@ -27,6 +26,6 @@ export default function DashboardLocations({ loading, locations }: DashboardLoca
           </div>
         </>
       )}
-    </>
+    </div>
   );
 }

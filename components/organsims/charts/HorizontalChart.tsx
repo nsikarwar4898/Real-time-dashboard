@@ -10,7 +10,7 @@ import {
   Legend,
 } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
-
+import type { Chart } from 'chart.js';
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
 interface horizontalChartProps {
@@ -45,30 +45,27 @@ export default function HorizontalBarChart({ data }: horizontalChartProps) {
 
   const topLabelPlugin = {
     id: 'topLabelPlugin',
-    afterDatasetsDraw(chart: any) {
+    afterDatasetsDraw(chart: Chart<'bar'>) {
       const { ctx } = chart;
-
-      chart.data.datasets.forEach((dataset: any, i: number) => {
+      chart.data.datasets.forEach((dataset, i) => {
         const meta = chart.getDatasetMeta(i);
-        meta.data.forEach((bar: any, index: number) => {
-          const value = dataset.data[index];
-          const styles = getCssVar('--text');
-          ctx.fillStyle = styles;
+        meta.data.forEach((bar, index) => {
+          const value = (dataset.data as number[])[index];
+          ctx.fillStyle = getCssVar('--text');
           ctx.font = 'bold 12px sans-serif';
           ctx.textAlign = 'left';
           ctx.textBaseline = 'middle';
-          ctx.fillText(value, bar.x + 10, bar.y);
+          ctx.fillText(String(value), bar.x + 10, bar.y);
         });
       });
     },
   };
-
   const horizontalChartOptions = {
-    indexAxis: 'y',
+    indexAxis: 'y' as const,
     responsive: true,
     maintainAspectRatio: false,
     plugins: {
-      legend: { display: false, position: 'top' },
+      legend: { display: false, position: 'top' as const },
       title: {
         display: false,
         text: 'Monthly Data (Jan - Jun)',
@@ -79,14 +76,12 @@ export default function HorizontalBarChart({ data }: horizontalChartProps) {
         grid: { display: true, drawBorder: false },
         border: { display: false },
         ticks: {
-          color: () => {
-            return getCssVar('--text');
-          },
+          color: () => getCssVar('--text'),
           stepSize: 400,
           display: false,
           font: {
             size: 14,
-            weight: 'bold',
+            weight: 'bold' as const,
           },
         },
       },
@@ -95,20 +90,18 @@ export default function HorizontalBarChart({ data }: horizontalChartProps) {
         beginAtZero: true,
         grid: { display: false, drawBorder: false },
         ticks: {
-          color: () => {
-            return getCssVar('--text');
-          },
-          stepsize: 100,
+          color: () => getCssVar('--text'),
+          stepSize: 100,
           display: true,
           font: {
             size: 14,
-            weight: 'bold',
+            weight: 'bold' as const,
           },
         },
         border: { display: false },
       },
     },
-  } as Record<string, any>;
+  };
 
   return (
     <div className="w-full max-w-xl mx-auto p-4 h-full bg-card-bg pb-10!">
