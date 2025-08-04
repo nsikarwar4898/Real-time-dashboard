@@ -5,13 +5,13 @@ import { DashboardApiResponse } from '@/lib/types/types';
 import { Responsive, WidthProvider, Layouts } from 'react-grid-layout';
 import 'react-grid-layout/css/styles.css';
 import 'react-resizable/css/styles.css';
-import { SummarySkeleton } from './organsims/DashboardSkeleton';
-import PaymentsTable from './organsims/PaymentsTable';
-import Summary from './organsims/Summary';
-import SubHeader from './organsims/SubHeader';
-import Header from './organsims/Header';
-import BarChart from './organsims/BarChart';
-import HorizontalBarChart from './organsims/HorizontalChart';
+import { SummarySkeleton } from '../organsims/DashboardSkeleton';
+import PaymentsTable from '../organsims/PaymentsTable';
+import Summary from '../organsims/Summary';
+import SubHeader from '../organsims/SubHeader';
+import Header from '../organsims/Header';
+import BarChart from '../organsims/BarChart';
+import HorizontalBarChart from '../organsims/HorizontalChart';
 import { defaultLayouts } from '@/lib/utils/gridLayout';
 import dynamic from 'next/dynamic';
 
@@ -20,8 +20,8 @@ const ResponsiveGridLayout = WidthProvider(Responsive);
 type Props = {
   initialData: DashboardApiResponse;
 };
-const Map = dynamic(() => import('./organsims/Map'), { ssr: false });
-const LineChart = dynamic(() => import('./organsims/LineChart'), { ssr: false });
+const Map = dynamic(() => import('../organsims/Map'), { ssr: false });
+const LineChart = dynamic(() => import('../organsims/LineChart'), { ssr: false });
 
 export default function DashboardClient({ initialData }: Props) {
   const [data, setData] = useState(initialData);

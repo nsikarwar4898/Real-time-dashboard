@@ -1,4 +1,4 @@
-import DashboardClient from '@/components/DashboardClient';
+import DashboardClient from '@/components/layout/DashboardClient';
 import { fetchDashboardData } from '@/lib/api/fetchDashboardData';
 
 export default async function DashboardPage() {
