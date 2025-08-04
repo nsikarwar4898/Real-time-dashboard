@@ -5,8 +5,6 @@ import { DashboardApiResponse } from '@/lib/types/types';
 import { Responsive, WidthProvider } from 'react-grid-layout';
 import 'react-grid-layout/css/styles.css';
 import 'react-resizable/css/styles.css';
-import SubHeader from '../organsims/SubHeader';
-import Header from '../organsims/Header';
 import { useDashboardData } from '@/lib/hooks/useDashboardData';
 import {
   DashboardLocations,
@@ -16,6 +14,7 @@ import {
   DashboardSummary,
   DashboardTopProducts,
 } from '../molecules';
+import { Header, SubHeader } from '../organsims';
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
@@ -45,7 +44,6 @@ export default function DashboardClient({ initialData }: Props) {
         onToggleEditMode={() => setEditMode(prev => !prev)}
         onReset={resetLayout}
       />
-
       <SubHeader
         lastUpdated={lastUpdated}
         autoFetchEnabled={autoFetchEnabled}

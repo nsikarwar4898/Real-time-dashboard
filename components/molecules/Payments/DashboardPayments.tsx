@@ -1,7 +1,6 @@
 'use client';
 
-import { SummarySkeleton } from '@/components/organsims/DashboardSkeleton';
-import PaymentsTable from '@/components/organsims/PaymentsTable';
+import { PaymentsTable, SummarySkeleton } from '@/components/organsims';
 
 type Props = {
   loading: boolean;

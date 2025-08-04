@@ -1,7 +1,6 @@
 'use client';
 
-import { SummarySkeleton } from '@/components/organsims/DashboardSkeleton';
-import Summary from '@/components/organsims/Summary';
+import { Summary, SummarySkeleton } from '@/components/organsims';
 
 type DashboardSummaryProps = {
   loading: boolean;

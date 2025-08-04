@@ -1,7 +1,7 @@
 'use client';
 
+import Logo from '@/components/icons/Logo';
 import { HiSun } from 'react-icons/hi';
-import Logo from '../icons/Logo';
 
 type Props = {
   editMode: boolean;

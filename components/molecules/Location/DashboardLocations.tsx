@@ -1,10 +1,10 @@
 'use client';
 
-import { SummarySkeleton } from '@/components/organsims/DashboardSkeleton';
+import { SummarySkeleton } from '@/components/organsims';
 import { Location } from '@/lib/types/types';
 import dynamic from 'next/dynamic';
 
-const Map = dynamic(() => import('@/components/organsims/Map'), { ssr: false });
+const Map = dynamic(() => import('@/components/organsims/dashboard/Map'), { ssr: false });
 
 type DashboardLocationsProps = {
   loading: boolean;

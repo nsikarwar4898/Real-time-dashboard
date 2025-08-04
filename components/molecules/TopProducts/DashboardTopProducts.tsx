@@ -1,7 +1,6 @@
 'use client';
 
-import { SummarySkeleton } from '@/components/organsims/DashboardSkeleton';
-import BarChart from '@/components/organsims/BarChart';
+import { BarChart, SummarySkeleton } from '@/components/organsims';
 
 type TopProduct = {
   id: string;

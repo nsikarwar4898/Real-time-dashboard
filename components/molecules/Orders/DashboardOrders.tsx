@@ -1,7 +1,7 @@
 'use client';
 
-import { SummarySkeleton } from '@/components/organsims/DashboardSkeleton';
-import HorizontalBarChart from '@/components/organsims/HorizontalChart';
+import { SummarySkeleton } from '@/components/organsims';
+import HorizontalBarChart from '@/components/organsims/charts/HorizontalChart';
 
 type UserEngagementChartData = {
   labels: string[];
