@@ -38,7 +38,7 @@ export default function Header({ editMode, onToggleEditMode, onReset }: Props) {
       </div>
 
       <div className="flex items-center gap-2">
-        <span className="text-blue-800 font-semibold text-lg flex items-center gap-1">
+        <span className="text-blue-800 font-semibold text-xl flex items-center gap-1">
           <Logo /> acme
         </span>
       </div>
