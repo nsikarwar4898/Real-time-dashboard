@@ -14,13 +14,13 @@ import BarChart from '../organsims/BarChart';
 import HorizontalBarChart from '../organsims/HorizontalChart';
 import dynamic from 'next/dynamic';
 import { useDashboardData } from '@/lib/hooks/useDashboardData';
+import DashboardLocations from '../molecules/Location/DashboardLocations';
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
 type Props = {
   initialData: DashboardApiResponse;
 };
-const Map = dynamic(() => import('../organsims/Map'), { ssr: false });
 const LineChart = dynamic(() => import('../organsims/LineChart'), { ssr: false });
 
 export default function DashboardClient({ initialData }: Props) {
@@ -149,18 +149,7 @@ export default function DashboardClient({ initialData }: Props) {
           key="locations"
           className="h-full overflow-hidden bg-card-bg border border-border rounded-2xl flex flex-col "
         >
-          {loading ? (
-            <SummarySkeleton />
-          ) : (
-            <>
-              <div className="text-sm text-title font-medium px-4 py-2 border-b border-border">
-                Locations
-              </div>
-              <div className="flex-1 p-4 rounded-xl">
-                <Map locations={data.data.dashboardData.map.locations} />
-              </div>
-            </>
-          )}
+          <DashboardLocations loading={loading} locations={data.data.dashboardData.map.locations} />
         </div>
       </ResponsiveGridLayout>
     </div>
