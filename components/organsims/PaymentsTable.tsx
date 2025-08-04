@@ -29,47 +29,49 @@ export default function PaymentsTable({ data }: paymentProps) {
       </div>
 
       <div className="px-4 flex flex-col items-center justify-between  h-96 w-full">
-        <div className="flex items-center justify-between w-full py-2 rounded">
-          <input
-            type="text"
-            placeholder="Filter..."
-            className="border placeholder-title border-border text-sm px-3 py-1 rounded w-1/2 focus:outline-none focus:ring-2 focus:border-2"
-          />
+        <div className="w-full">
+          <div className="flex items-center justify-between w-full py-2 rounded">
+            <input
+              type="text"
+              placeholder="Filter..."
+              className="border placeholder-title border-border text-sm px-3 py-1 rounded w-1/2 focus:outline-none focus:ring-2 focus:border-2"
+            />
 
-          <select className="border text-title border-border text-sm px-2 py-1 rounded bg-card-bg">
-            <option>Columns</option>
-            <option>Column 1</option>
-            <option>Column 2</option>
-            <option>Column 3</option>
-          </select>
-        </div>
+            <select className="border text-title border-border text-sm px-2 py-1 rounded bg-card-bg">
+              <option>Columns</option>
+              <option>Column 1</option>
+              <option>Column 2</option>
+              <option>Column 3</option>
+            </select>
+          </div>
 
-        <table className="w-full text-sm border-collapse">
-          <thead className="text-left text-title bg-card-bg border-b border-border">
-            <tr>
-              <th className="p-2">
-                <input type="checkbox" />
-              </th>
-              <th className="p-2">Status</th>
-              <th className="p-2">Email</th>
-              <th className="p-2">Amount</th>
-              <th className="p-2">Total net</th>
-            </tr>
-          </thead>
-          <tbody>
-            {currentItems.map(payment => (
-              <tr key={payment.id} className="border-b border-border text-text">
-                <td className="p-2">
+          <table className="w-full text-sm border-collapse">
+            <thead className="text-left text-title bg-card-bg border-b border-border">
+              <tr>
+                <th className="p-2">
                   <input type="checkbox" />
-                </td>
-                <td className="p-2">{faker.datatype.boolean() ? 'success' : 'failure'}</td>
-                <td className="p-2">{payment.user}@yahoo.com</td>
-                <td className="p-2">${payment.amount}</td>
-                <td className="p-2">${payment.amount}</td>
+                </th>
+                <th className="p-2">Status</th>
+                <th className="p-2">Email</th>
+                <th className="p-2">Amount</th>
+                <th className="p-2">Total net</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {currentItems.map(payment => (
+                <tr key={payment.id} className="border-b border-border text-text">
+                  <td className="p-2">
+                    <input type="checkbox" />
+                  </td>
+                  <td className="p-2">{faker.datatype.boolean() ? 'success' : 'failure'}</td>
+                  <td className="p-2">{payment.user}@yahoo.com</td>
+                  <td className="p-2">${payment.amount}</td>
+                  <td className="p-2">${payment.amount}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
 
         <div className="flex items-end  justify-between py-3 text-sm text-title w-full">
           <span>
@@ -91,7 +93,7 @@ export default function PaymentsTable({ data }: paymentProps) {
                 key={i + 1}
                 onClick={() => setCurrentPage(i + 1)}
                 className={`px-2 py-1 ${
-                  currentPage === i + 1 ? 'bg-primary text-white rounded' : 'text-title'
+                  currentPage === i + 1 ? 'bg-primary rounded' : 'text-title'
                 }`}
               >
                 {i + 1}
