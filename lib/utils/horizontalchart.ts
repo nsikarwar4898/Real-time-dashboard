@@ -29,18 +29,19 @@ export const topLabelPlugin = {
       const meta = chart.getDatasetMeta(i);
       meta.data.forEach((bar: any, index: number) => {
         const value = dataset.data[index];
-        ctx.fillStyle = '#000';
+        const styles = getCssVar('--text');
+        ctx.fillStyle = styles;
         ctx.font = 'bold 12px sans-serif';
         ctx.textAlign = 'left';
         ctx.textBaseline = 'middle';
-        ctx.fillText(value, bar.x + 10, bar.y); // ✅ horizontal bar label positioning
+        ctx.fillText(value, bar.x + 10, bar.y);
       });
     });
   },
 };
 
 export const horizontalChartOptions = {
-  indexAxis: 'y', // ✅ use this to make chart horizontal
+  indexAxis: 'y',
   responsive: true,
   maintainAspectRatio: false,
   plugins: {
@@ -55,7 +56,11 @@ export const horizontalChartOptions = {
       grid: { display: true, drawBorder: false },
       border: { display: false },
       ticks: {
+        color: () => {
+          return getCssVar('--text');
+        },
         stepSize: 20,
+        display: false,
         font: {
           size: 14,
           weight: 'bold',
@@ -67,6 +72,9 @@ export const horizontalChartOptions = {
       beginAtZero: true,
       grid: { display: false, drawBorder: false },
       ticks: {
+        color: () => {
+          return getCssVar('--text');
+        },
         stepsize: 20,
         display: true,
         font: {

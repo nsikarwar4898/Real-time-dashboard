@@ -11,10 +11,18 @@ export const lineData = {
       fill: true,
       borderColor: getCssVar('--linechart-line'),
       backgroundColor: (ctx: any) => {
-        const gradient2 = ctx.chart.ctx.createLinearGradient(0, 0, 0, 300);
-        gradient2.addColorStop(0, getCssVar('--linegradient-under-from'));
-        gradient2.addColorStop(1, getCssVar('--linegradient-under-to'));
-        return gradient2;
+        const from = getCssVar('--linegradient-under-from').trim();
+        const to = getCssVar('--linegradient-under-to').trim();
+
+        if (!from || !to) {
+          console.warn('Colors not available yet, returning transparent');
+          return 'transparent';
+        }
+
+        const gradient = ctx.chart.ctx.createLinearGradient(0, 0, 0, 300);
+        gradient.addColorStop(0, from);
+        gradient.addColorStop(1, to);
+        return gradient;
       },
       tension: 0.4,
       pointBackgroundColor: '#07557C',
@@ -25,9 +33,17 @@ export const lineData = {
       fill: 0,
       borderColor: '#07557C',
       backgroundColor: (ctx: any) => {
+        const from = getCssVar('--linegradient-from')?.trim();
+        const to = getCssVar('--linegradient-to')?.trim();
+
+        if (!from || !to) {
+          console.warn('Line gradient colors not available, returning transparent');
+          return 'transparent'; // Prevents Chart.js from crashing
+        }
+
         const gradient = ctx.chart.ctx.createLinearGradient(0, 0, 0, 300);
-        gradient.addColorStop(0, getCssVar('--linegradient-from'));
-        gradient.addColorStop(1, getCssVar('--linegradient-to'));
+        gradient.addColorStop(0, from);
+        gradient.addColorStop(1, to);
         return gradient;
       },
       tension: 0.4,
@@ -64,6 +80,9 @@ export const lineOptions = {
         display: false,
       },
       ticks: {
+        color: () => {
+          return getCssVar('--text');
+        },
         font: {
           size: 14,
           weight: 'bold ',
@@ -79,6 +98,9 @@ export const lineOptions = {
       min: 0,
       max: 1000,
       ticks: {
+        color: () => {
+          return getCssVar('--text');
+        },
         stepSize: 200,
         font: {
           size: 14,
