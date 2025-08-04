@@ -15,6 +15,7 @@ import HorizontalBarChart from '../organsims/HorizontalChart';
 import dynamic from 'next/dynamic';
 import { useDashboardData } from '@/lib/hooks/useDashboardData';
 import DashboardLocations from '../molecules/Location/DashboardLocations';
+import DashboardSummary from '../molecules/Summary/DashboardSummary';
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
@@ -66,13 +67,9 @@ export default function DashboardClient({ initialData }: Props) {
         useCSSTransforms={true}
         onLayoutChange={handleLayoutChange}
       >
-        <div
-          key="summary"
-          className="h-full overflow-hidden bg-card-bg border rounded-2xl border-border  p-4"
-        >
-          {loading ? <SummarySkeleton /> : <Summary />}
+        <div key="summary">
+          <DashboardSummary loading={loading} />
         </div>
-
         <div
           key="orders"
           className="h-full overflow-hidden bg-card-bg border border-border rounded-2xl flex flex-col"
