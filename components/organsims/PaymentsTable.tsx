@@ -28,7 +28,7 @@ export default function PaymentsTable({ data }: paymentProps) {
         Payments history
       </div>
 
-      <div className="px-4 flex flex-col items-center justify-between border-2 h-96 w-full">
+      <div className="px-4 flex flex-col items-center justify-between  h-96 w-full">
        
         <div className="flex items-center justify-between w-full py-2 rounded">
           <input
@@ -74,7 +74,7 @@ export default function PaymentsTable({ data }: paymentProps) {
         </table>
 
        
-        <div className="flex items-end  border-2 justify-between py-3 text-sm text-title w-full">
+        <div className="flex items-end  justify-between py-3 text-sm text-title w-full">
           <span>
             {startIndex + 1} - {Math.min(startIndex + itemsPerPage, data.length)} of {data.length}{' '}
             row(s)
