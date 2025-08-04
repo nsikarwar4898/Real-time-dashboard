@@ -7,23 +7,20 @@ import 'react-grid-layout/css/styles.css';
 import 'react-resizable/css/styles.css';
 import { SummarySkeleton } from '../organsims/DashboardSkeleton';
 import PaymentsTable from '../organsims/PaymentsTable';
-import Summary from '../organsims/Summary';
 import SubHeader from '../organsims/SubHeader';
 import Header from '../organsims/Header';
-import BarChart from '../organsims/BarChart';
-import HorizontalBarChart from '../organsims/HorizontalChart';
-import dynamic from 'next/dynamic';
 import { useDashboardData } from '@/lib/hooks/useDashboardData';
 import DashboardLocations from '../molecules/Location/DashboardLocations';
 import DashboardSummary from '../molecules/Summary/DashboardSummary';
 import DashboardOrders from '../molecules/Orders/DashboardOrders';
+import DashboardTopProducts from '../molecules/TopProducts/DashboardTopProducts';
+import DashboardSalesChart from '../molecules/SalesChart/DashboardSalesChart';
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
 type Props = {
   initialData: DashboardApiResponse;
 };
-const LineChart = dynamic(() => import('../organsims/LineChart'), { ssr: false });
 
 export default function DashboardClient({ initialData }: Props) {
   const {
@@ -79,47 +76,20 @@ export default function DashboardClient({ initialData }: Props) {
           />
         </div>
 
-        <div
-          key="topProducts"
-          className="h-full overflow-hidden bg-card-bg border border-border rounded-2xl flex flex-col"
-        >
-          {!initialLoad ? (
-            <SummarySkeleton />
-          ) : loading ? (
-            <SummarySkeleton />
-          ) : (
-            <>
-              <div className="text-sm text-title p-2 border-b border-border flex items-center">
-                Top Products
-              </div>
-              <div className="flex-1 p-2">
-                <BarChart data={data.data.dashboardData.tables.topProducts} />
-              </div>
-            </>
-          )}
+        <div key="topProducts">
+          <DashboardTopProducts
+            loading={loading}
+            initialLoad={initialLoad}
+            topProductsData={data.data.dashboardData.tables.topProducts}
+          />
         </div>
 
-        <div
-          key="salesChart"
-          className="h-full overflow-hidden bg-card-bg border border-border rounded-2xl flex flex-col"
-        >
-          {!initialLoad ? (
-            <SummarySkeleton />
-          ) : loading ? (
-            <SummarySkeleton />
-          ) : (
-            <>
-              <div className="text-sm text-title font-medium flex items-end px-4 pt-3 pb-3 border-b border-border">
-                Sales Chart
-              </div>
-              <div className="flex-1 p-4">
-                <LineChart
-                  data={data.data.dashboardData.charts.salesOverTime.data}
-                  labels={data.data.dashboardData.charts.salesOverTime.labels}
-                />
-              </div>
-            </>
-          )}
+        <div key="salesChart">
+          <DashboardSalesChart
+            loading={loading}
+            initialLoad={initialLoad}
+            data={data.data.dashboardData.charts.salesOverTime}
+          />
         </div>
 
         <div
