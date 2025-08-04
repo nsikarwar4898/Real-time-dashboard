@@ -12,7 +12,8 @@ import {
   Filler,
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
-
+import type { ScriptableContext } from 'chart.js';
+import type { ChartOptions } from 'chart.js';
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -37,34 +38,12 @@ export default function LineChart({ data, labels }: SalesOverTime) {
   const lineData = {
     labels: lineLabels,
     datasets: [
-      // {
-      //   label: 'Monthly Sales',
-      //   data: lineSales2,
-      //   fill: true,
-      //   borderColor: getCssVar('--linechart-line'),
-      //   backgroundColor: (ctx: any) => {
-      //     const from = getCssVar('--linegradient-under-from').trim();
-      //     const to = getCssVar('--linegradient-under-to').trim();
-
-      //     if (!from || !to) {
-      //       console.warn('Colors not available yet, returning transparent');
-      //       return 'transparent';
-      //     }
-
-      //     const gradient = ctx.chart.ctx.createLinearGradient(0, 0, 0, 300);
-      //     gradient.addColorStop(0, from);
-      //     gradient.addColorStop(1, to);
-      //     return gradient;
-      //   },
-      //   tension: 0.4,
-      //   pointBackgroundColor: '#07557C',
-      // },
       {
         label: 'Monthly Sales',
         data: lineSales,
         fill: true,
         borderColor: '#07557C',
-        backgroundColor: (ctx: any) => {
+        backgroundColor: (ctx: ScriptableContext<'line'>) => {
           const from = getCssVar('--linegradient-from')?.trim();
           const to = getCssVar('--linegradient-to')?.trim();
 
@@ -90,7 +69,7 @@ export default function LineChart({ data, labels }: SalesOverTime) {
     return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
   }
 
-  const lineOptions = {
+  const lineOptions: ChartOptions<'line'> = {
     responsive: true,
     maintainAspectRatio: false,
     plugins: {
@@ -108,7 +87,6 @@ export default function LineChart({ data, labels }: SalesOverTime) {
         type: 'category',
         grid: {
           display: false,
-          drawBorder: false,
         },
         border: {
           display: false,
@@ -119,7 +97,7 @@ export default function LineChart({ data, labels }: SalesOverTime) {
           },
           font: {
             size: 14,
-            weight: 'bold ',
+            weight: 'bold' as const,
           },
         },
       },
@@ -127,7 +105,6 @@ export default function LineChart({ data, labels }: SalesOverTime) {
         type: 'linear',
         grid: {
           display: false,
-          drawBorder: false,
         },
         min: 0,
         max: 300,
@@ -138,14 +115,14 @@ export default function LineChart({ data, labels }: SalesOverTime) {
           stepSize: 200,
           font: {
             size: 14,
-            weight: 'bold',
+            weight: 'bold' as const,
           },
         },
         border: {
           display: false,
         },
       },
-    } as Record<string, any>,
+    },
   };
 
   return (
