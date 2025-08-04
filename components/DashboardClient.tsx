@@ -5,7 +5,7 @@ import { DashboardApiResponse } from '@/lib/types/types';
 import { Responsive, WidthProvider, Layouts } from 'react-grid-layout';
 import 'react-grid-layout/css/styles.css';
 import 'react-resizable/css/styles.css';
-import { SummarySkeleton } from './skeletons/DashboardSkeleton';
+import { SummarySkeleton } from './organsims/DashboardSkeleton';
 import PaymentsTable from './organsims/PaymentsTable';
 import Summary from './organsims/Summary';
 import SubHeader from './organsims/SubHeader';
@@ -139,7 +139,7 @@ export default function DashboardClient({ initialData }: Props) {
             <>
               <div className="text-sm text-title p-2 border-b border-border">Orders</div>
               <div className="flex-1 p-2">
-                <HorizontalBarChart data={data.data.dashboardData.charts.userEngagement}/>
+                <HorizontalBarChart data={data.data.dashboardData.charts.userEngagement} />
               </div>
             </>
           )}
@@ -179,7 +179,10 @@ export default function DashboardClient({ initialData }: Props) {
                 Sales Chart
               </div>
               <div className="flex-1 p-4">
-                <LineChart data={data.data.dashboardData.charts.salesOverTime.data} labels={data.data.dashboardData.charts.salesOverTime.labels} />
+                <LineChart
+                  data={data.data.dashboardData.charts.salesOverTime.data}
+                  labels={data.data.dashboardData.charts.salesOverTime.labels}
+                />
               </div>
             </>
           )}
@@ -189,7 +192,11 @@ export default function DashboardClient({ initialData }: Props) {
           key="payments"
           className="h-full overflow-hidden bg-card-bg border border-border rounded-2xl p-4"
         >
-          {loading ? <SummarySkeleton /> : <PaymentsTable data={data.data.dashboardData.tables.recentTransactions}/>}
+          {loading ? (
+            <SummarySkeleton />
+          ) : (
+            <PaymentsTable data={data.data.dashboardData.tables.recentTransactions} />
+          )}
         </div>
 
         <div
