@@ -97,7 +97,7 @@ export default function BarChart({ data }: BarChartProps) {
         },
         border: { display: false },
       },
-    },
+    } as Record<string, any>,
   };
 
   return (
