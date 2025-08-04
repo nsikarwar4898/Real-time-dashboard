@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from 'react';
 import { faker } from '@faker-js/faker';
 
 interface Transaction {
@@ -14,13 +15,21 @@ interface paymentProps {
 }
 
 export default function PaymentsTable({ data }: paymentProps) {
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 6;
+
+  const totalPages = Math.ceil(data.length / itemsPerPage);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const currentItems = data.slice(startIndex, startIndex + itemsPerPage);
+
   return (
-    <div className="bg-card-bg rounded ">
-      <div className="text-sm text-title font-medium px-4 py-1 flex items-center  border-b border-border rounded-t">
+    <div className="bg-card-bg rounded">
+      <div className="text-sm text-title font-medium px-4 py-1 flex items-center border-b border-border rounded-t">
         Payments history
       </div>
 
-      <div className="p-4">
+      <div className="px-4 flex flex-col items-center justify-between border-2 h-96 w-full">
+       
         <div className="flex items-center justify-between w-full py-2 rounded">
           <input
             type="text"
@@ -36,6 +45,7 @@ export default function PaymentsTable({ data }: paymentProps) {
           </select>
         </div>
 
+       
         <table className="w-full text-sm border-collapse">
           <thead className="text-left text-title bg-card-bg border-b border-border">
             <tr>
@@ -49,7 +59,7 @@ export default function PaymentsTable({ data }: paymentProps) {
             </tr>
           </thead>
           <tbody>
-            {data.map(payment => (
+            {currentItems.map(payment => (
               <tr key={payment.id} className="border-b border-border text-text">
                 <td className="p-2">
                   <input type="checkbox" />
@@ -63,16 +73,41 @@ export default function PaymentsTable({ data }: paymentProps) {
           </tbody>
         </table>
 
-        <div className="flex  items-center justify-between py-3 text-sm text-title">
-          <span>0 of 5 row(s) selected.</span>
+       
+        <div className="flex items-end  border-2 justify-between py-3 text-sm text-title w-full">
+          <span>
+            {startIndex + 1} - {Math.min(startIndex + itemsPerPage, data.length)} of {data.length}{' '}
+            row(s)
+          </span>
 
-          <div className="flex items-center space-x-1">
-            <button className="px-2 py-1 border border-border rounded ">&lt;</button>
-            <button className="px-2 py-1 text-title">1</button>
-            <button className="px-2 py-1 text-title">2</button>
-            <button className="px-2 py-1 text-title">3</button>
-            <span className="px-2 py-1 text-title">...</span>
-            <button className="px-2 py-1 border border-border rounded">&gt;</button>
+          <div className="flex items-center space-x-1n ">
+            <button
+              disabled={currentPage === 1}
+              onClick={() => setCurrentPage(p => p - 1)}
+              className="px-2 py-1 border border-border rounded disabled:opacity-50"
+            >
+              &lt;
+            </button>
+
+            {Array.from({ length: totalPages }, (_, i) => (
+              <button
+                key={i + 1}
+                onClick={() => setCurrentPage(i + 1)}
+                className={`px-2 py-1 ${
+                  currentPage === i + 1 ? 'bg-primary text-white rounded' : 'text-title'
+                }`}
+              >
+                {i + 1}
+              </button>
+            ))}
+
+            <button
+              disabled={currentPage === totalPages}
+              onClick={() => setCurrentPage(p => p + 1)}
+              className="px-2 py-1 border border-border rounded disabled:opacity-50"
+            >
+              &gt;
+            </button>
           </div>
         </div>
       </div>
