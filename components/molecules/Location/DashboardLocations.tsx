@@ -4,13 +4,13 @@ import { SummarySkeleton } from '@/components/organsims';
 import { Location } from '@/lib/types/types';
 import dynamic from 'next/dynamic';
 
-const Map = dynamic(() => import('@/components/organsims/dashboard/Map'), { ssr: false });
-
 type DashboardLocationsProps = {
   loading: boolean;
   locations: Location[];
 };
-
+const Map = dynamic(() => import('@/components/organsims/dashboard/Map'), {
+  ssr: false,
+});
 export default function DashboardLocations({ loading, locations }: DashboardLocationsProps) {
   return (
     <div className="h-full overflow-hidden bg-card-bg border border-border rounded-2xl flex flex-col">
