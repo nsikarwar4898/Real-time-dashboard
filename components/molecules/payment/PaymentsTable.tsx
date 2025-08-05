@@ -46,27 +46,27 @@ export default function PaymentsTable({ dashboardData }: PaymentProps) {
               <option>{content.payments.column3}</option>
             </select>
           </div>
-
-          <table className="w-full text-sm border-collapse">
-            <thead className="text-left text-title bg-card-bg border-b border-border">
-              <tr>
-                <th className="p-2">
-                  <input type="checkbox" />
-                </th>
-                <th className="p-2">{content.payments.status}</th>
-                <th className="p-2">{content.payments.email}</th>
-                <th className="p-2">{content.payments.amount}</th>
-                <th className="p-2">{content.payments.totalNet}</th>
-              </tr>
-            </thead>
-            <tbody>
-              {currentItems.map(payment => (
-                <PaymentsTableRow key={payment.id} payment={payment} />
-              ))}
-            </tbody>
-          </table>
+          <div className="w-full rounded-3xl border border-border">
+            <table className="w-full text-sm border-collapse">
+              <thead className="text-left text-title bg-card-bg border-b border-border">
+                <tr>
+                  <th className="p-2">
+                    <input type="checkbox" />
+                  </th>
+                  <th className="p-2">{content.payments.status}</th>
+                  <th className="p-2">{content.payments.email}</th>
+                  <th className="p-2">{content.payments.amount}</th>
+                  <th className="p-2">{content.payments.totalNet}</th>
+                </tr>
+              </thead>
+              <tbody>
+                {currentItems.map(payment => (
+                  <PaymentsTableRow key={payment.id} payment={payment} />
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
-
         <div className="flex items-end  justify-between py-3 text-sm text-title w-full">
           <span>
             {startIndex + 1} - {Math.min(startIndex + itemsPerPage, dashboardData.length)} of{' '}
