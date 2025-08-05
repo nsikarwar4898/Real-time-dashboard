@@ -10,11 +10,11 @@ type Transaction = {
   date: string;
 };
 
-type Props = {
+type PaymentsTableRowProps = {
   payment: Transaction;
 };
 
-function PaymentsTableRow({ payment }: Props) {
+function PaymentsTableRow({ payment }: PaymentsTableRowProps) {
   return (
     <tr className="border-b border-border text-text">
       <td className="p-2">
