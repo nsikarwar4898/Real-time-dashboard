@@ -12,7 +12,7 @@ import {
 import { DashboardLayout } from '../layout';
 import { withSkeletonWrapper } from '../hoc/withSkeletonWrapper';
 import dynamic from 'next/dynamic';
-import { Summary } from '../molecules';
+import { BarChart, Summary } from '../molecules';
 import HorizontalBarChart from '../molecules/charts/HorizontalChart';
 
 type Props = {
@@ -36,7 +36,9 @@ export default function DashboardClient({ initialData }: Props) {
   const [editMode, setEditMode] = useState(false);
   const SkeletonWrapper = withSkeletonWrapper();
   const Map = dynamic(() => import('@/components/molecules/dashboard/Map'), { ssr: false });
-
+  const LineChart = dynamic(() => import('@/components/molecules/charts/LineChart'), {
+    ssr: false,
+  });
   return (
     <DashboardLayout
       editMode={editMode}
@@ -74,18 +76,39 @@ export default function DashboardClient({ initialData }: Props) {
         </SkeletonWrapper>
       </div>
       <div key="topProducts">
-        <DashboardTopProducts
-          loading={loading}
-          initialLoad={initialLoad}
-          topProductsData={data.data.dashboardData.tables.topProducts}
-        />
+        <SkeletonWrapper loading={loading}>
+          <div className="text-sm text-title p-2 border-b border-border flex items-center">
+            Top Products
+          </div>
+
+          <div className="flex-1 p-2">
+            <BarChart data={data.data.dashboardData.tables.topProducts} />
+          </div>
+
+          <div className="flex items-center justify-center gap-4 px-3 pb-4 text-sm text-title">
+            <div className="flex items-center gap-1">
+              <span className="w-3 h-3 rounded-sm" style={{ backgroundColor: '#4B9CD3' }}></span>
+              ACME Prod - 01
+            </div>
+            <div className="flex items-center gap-1">
+              <span className="w-3 h-3 rounded-sm" style={{ backgroundColor: '#07557C' }}></span>
+              ACME Prod - 02
+            </div>
+          </div>
+        </SkeletonWrapper>
       </div>
       <div key="salesChart">
-        <DashboardSalesChart
-          loading={loading}
-          initialLoad={initialLoad}
-          data={data.data.dashboardData.charts.salesOverTime}
-        />
+        <SkeletonWrapper loading={loading}>
+          <div className="text-sm text-title font-medium flex items-end px-4 pt-3 pb-3 border-b border-border">
+            Sales Chart
+          </div>
+          <div className="flex-1 p-4">
+            <LineChart
+              data={data.data.dashboardData.charts.salesOverTime.data}
+              labels={data.data.dashboardData.charts.salesOverTime.labels}
+            />
+          </div>
+        </SkeletonWrapper>
       </div>
       <div key="payments">
         <DashboardPayments
