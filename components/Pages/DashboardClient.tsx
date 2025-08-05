@@ -1,6 +1,5 @@
 'use client';
 
-import { useState } from 'react';
 import { DashboardApiResponse } from '@/lib/types/types';
 import { useDashboardData } from '@/lib/hooks/useDashboardData';
 import { DashboardLayout } from '../layout';
@@ -10,54 +9,58 @@ import { BarChart, PaymentsTable, Summary } from '../molecules';
 import HorizontalBarChart from '../molecules/charts/HorizontalChart';
 import { content } from '@/lib/utils/content';
 
-type Props = {
+type DashboardClientProps = {
   initialData: DashboardApiResponse;
 };
 
-export default function DashboardClient({ initialData }: Props) {
+export default function DashboardClient({ initialData }: DashboardClientProps) {
   const {
-    data,
+    dashboardData,
     layout,
-    loading,
-    lastUpdated,
+    isLoading,
+    islastUpdated,
     autoFetchEnabled,
-    fetchData,
+    fetchDashboardData,
     resetLayout,
     setAutoFetchEnabled,
     handleLayoutChange,
+    isEditMode,
+    setIsEditMode,
   } = useDashboardData(initialData);
 
-  const [editMode, setEditMode] = useState(false);
   const SkeletonWrapper = withSkeletonWrapper();
   const Map = dynamic(() => import('@/components/molecules/map/Map'), { ssr: false });
   const LineChart = dynamic(() => import('@/components/molecules/charts/LineChart'), {
     ssr: false,
   });
+
   return (
     <DashboardLayout
-      editMode={editMode}
-      lastUpdated={lastUpdated}
+      editMode={isEditMode}
+      lastUpdated={islastUpdated}
       autoFetchEnabled={autoFetchEnabled}
       layout={layout}
-      onToggleEditMode={() => setEditMode(prev => !prev)}
+      onToggleEditMode={() => setIsEditMode(prev => !prev)}
       onReset={resetLayout}
-      onRefresh={fetchData}
+      onRefresh={fetchDashboardData}
       onToggleAutoFetch={() => setAutoFetchEnabled(prev => !prev)}
       onLayoutChange={handleLayoutChange}
     >
       <div key="summary">
-        <SkeletonWrapper loading={loading}>
+        <SkeletonWrapper loading={isLoading}>
           <div className="p-4">
             <Summary />
           </div>
         </SkeletonWrapper>
       </div>
       <div key="orders">
-        <SkeletonWrapper loading={loading}>
+        <SkeletonWrapper loading={isLoading}>
           <div className="text-sm text-title p-2 border-b border-border">Orders</div>
 
           <div className="flex-1 p-2">
-            <HorizontalBarChart data={data.data.dashboardData.charts.userEngagement} />
+            <HorizontalBarChart
+              dashboardData={dashboardData.data.dashboardData.charts.userEngagement}
+            />
           </div>
 
           <div className="px-4 pb-4 text-sm text-text">
@@ -70,13 +73,13 @@ export default function DashboardClient({ initialData }: Props) {
         </SkeletonWrapper>
       </div>
       <div key="topProducts">
-        <SkeletonWrapper loading={loading}>
+        <SkeletonWrapper loading={isLoading}>
           <div className="text-sm text-title p-2 border-b border-border flex items-center">
             {content.dashboard.topProducts}
           </div>
 
           <div className="flex-1 p-2">
-            <BarChart data={data.data.dashboardData.tables.topProducts} />
+            <BarChart dashboardData={dashboardData.data.dashboardData.tables.topProducts} />
           </div>
 
           <div className="flex items-center justify-center gap-4 px-3 pb-4 text-sm text-title">
@@ -92,30 +95,32 @@ export default function DashboardClient({ initialData }: Props) {
         </SkeletonWrapper>
       </div>
       <div key="salesChart">
-        <SkeletonWrapper loading={loading}>
+        <SkeletonWrapper loading={isLoading}>
           <div className="text-sm text-title font-medium flex items-end px-4 pt-3 pb-3 border-b border-border">
             {content.dashboard.salesTitle}
           </div>
           <div className="flex-1 p-4">
             <LineChart
-              data={data.data.dashboardData.charts.salesOverTime.data}
-              labels={data.data.dashboardData.charts.salesOverTime.labels}
+              dashboardData={dashboardData.data.dashboardData.charts.salesOverTime.data}
+              labels={dashboardData.data.dashboardData.charts.salesOverTime.labels}
             />
           </div>
         </SkeletonWrapper>
       </div>
       <div key="payments">
-        <SkeletonWrapper loading={loading}>
-          <PaymentsTable data={data.data.dashboardData.tables.recentTransactions} />
+        <SkeletonWrapper loading={isLoading}>
+          <PaymentsTable
+            dashboardData={dashboardData.data.dashboardData.tables.recentTransactions}
+          />
         </SkeletonWrapper>
       </div>
       <div key="locations">
-        <SkeletonWrapper loading={loading}>
+        <SkeletonWrapper loading={isLoading}>
           <div className="text-sm text-title font-medium px-4 py-2 border-b border-border">
             {content.dashboard.locations}
           </div>
           <div className="flex-1 p-4 rounded-xl">
-            <Map locations={data.data.dashboardData.map.locations} />
+            <Map locations={dashboardData.data.dashboardData.map.locations} />
           </div>
         </SkeletonWrapper>
       </div>

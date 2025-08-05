@@ -15,7 +15,7 @@ import type { Chart } from 'chart.js';
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
 interface BarChartProps {
-  data: {
+  dashboardData: {
     id: string;
     name: string;
     sales: number;
@@ -26,9 +26,9 @@ function getCssVar(name: string): string {
   return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
 }
 
-export default function BarChart({ data }: BarChartProps) {
-  const labels = data.map(item => item.name.split(' ')[1]);
-  const values = data.map(item => item.sales);
+export default function BarChart({ dashboardData }: BarChartProps) {
+  const labels = dashboardData.map(item => item.name.split(' ')[1]);
+  const values = dashboardData.map(item => item.sales);
 
   const barData = {
     labels,

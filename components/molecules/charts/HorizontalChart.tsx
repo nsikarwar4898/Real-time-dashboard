@@ -14,15 +14,15 @@ import type { Chart } from 'chart.js';
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
 interface horizontalChartProps {
-  data: {
+  dashboardData: {
     labels: string[];
     data: number[];
   };
 }
 
-export default function HorizontalBarChart({ data }: horizontalChartProps) {
-  const weeks = data.labels;
-  const fixedData = data.data;
+export default function HorizontalBarChart({ dashboardData }: horizontalChartProps) {
+  const weeks = dashboardData.labels;
+  const fixedData = dashboardData.data;
 
   function getCssVar(name: string): string {
     return getComputedStyle(document.documentElement).getPropertyValue(name).trim();

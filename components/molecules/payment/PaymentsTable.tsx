@@ -12,18 +12,18 @@ interface Transaction {
 }
 
 interface paymentProps {
-  data: Transaction[];
+  dashboardData: Transaction[];
 }
 
 const PaymentsTableRow = dynamic(() => import('./PaymentsTableRow'), { ssr: false });
 
-export default function PaymentsTable({ data }: paymentProps) {
+export default function PaymentsTable({ dashboardData }: paymentProps) {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 6;
 
-  const totalPages = Math.ceil(data.length / itemsPerPage);
+  const totalPages = Math.ceil(dashboardData.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
-  const currentItems = data.slice(startIndex, startIndex + itemsPerPage);
+  const currentItems = dashboardData.slice(startIndex, startIndex + itemsPerPage);
 
   return (
     <div className="bg-card-bg rounded">
@@ -70,8 +70,8 @@ export default function PaymentsTable({ data }: paymentProps) {
 
         <div className="flex items-end  justify-between py-3 text-sm text-title w-full">
           <span>
-            {startIndex + 1} - {Math.min(startIndex + itemsPerPage, data.length)} of {data.length}{' '}
-            row(s)
+            {startIndex + 1} - {Math.min(startIndex + itemsPerPage, dashboardData.length)} of{' '}
+            {dashboardData.length} row(s)
           </span>
 
           <div className="flex items-center space-x-1n ">
