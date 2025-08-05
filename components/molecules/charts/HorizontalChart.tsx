@@ -107,7 +107,7 @@ export default function HorizontalBarChart({ dashboardData }: HorizontalChartPro
   };
 
   return (
-    <div className="w-full max-w-xl mx-auto p-4 h-full bg-card-bg pb-10!">
+    <div className="w-full max-w-xl mx-auto p-1 h-full bg-card-bg">
       <Bar options={horizontalChartOptions} data={horizontalChartData} plugins={[topLabelPlugin]} />
     </div>
   );
