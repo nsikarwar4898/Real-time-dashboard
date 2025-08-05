@@ -13,6 +13,7 @@ import { DashboardLayout } from '../layout';
 import { withSkeletonWrapper } from '../hoc/withSkeletonWrapper';
 import dynamic from 'next/dynamic';
 import { Summary } from '../molecules';
+import HorizontalBarChart from '../molecules/charts/HorizontalChart';
 
 type Props = {
   initialData: DashboardApiResponse;
@@ -56,11 +57,21 @@ export default function DashboardClient({ initialData }: Props) {
         </SkeletonWrapper>
       </div>
       <div key="orders">
-        <DashboardOrders
-          loading={loading}
-          initialLoad={initialLoad}
-          userEngagementData={data.data.dashboardData.charts.userEngagement}
-        />
+        <SkeletonWrapper loading={loading}>
+          <>
+            <div className="text-sm text-title p-2 border-b border-border">Orders</div>
+
+            <div className="flex-1 p-2">
+              <HorizontalBarChart data={data.data.dashboardData.charts.userEngagement} />
+            </div>
+
+            <div className="px-4 pb-4 text-sm text-text">
+              Trending up by <span className="font-semibold text-title">5.2%</span> this month
+              <br />
+              <span className="text-xs text-muted">January – June 2027</span>
+            </div>
+          </>
+        </SkeletonWrapper>
       </div>
       <div key="topProducts">
         <DashboardTopProducts
