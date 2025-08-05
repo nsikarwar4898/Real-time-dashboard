@@ -11,18 +11,21 @@ import {
 } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
 import type { Chart } from 'chart.js';
+
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
-interface horizontalChartProps {
-  data: {
-    labels: string[];
-    data: number[];
-  };
-}
+type ChartData = {
+  labels: string[];
+  data: number[];
+};
 
-export default function HorizontalBarChart({ data }: horizontalChartProps) {
-  const weeks = data.labels;
-  const fixedData = data.data;
+type HorizontalChartProps = {
+  dashboardData: ChartData;
+};
+
+export default function HorizontalBarChart({ dashboardData }: HorizontalChartProps) {
+  const weeks = dashboardData.labels;
+  const fixedData = dashboardData.data;
 
   function getCssVar(name: string): string {
     return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
@@ -104,7 +107,7 @@ export default function HorizontalBarChart({ data }: horizontalChartProps) {
   };
 
   return (
-    <div className="w-full max-w-xl mx-auto p-4 h-full bg-card-bg pb-10!">
+    <div className="w-full max-w-xl mx-auto p-1 h-full bg-card-bg">
       <Bar options={horizontalChartOptions} data={horizontalChartData} plugins={[topLabelPlugin]} />
     </div>
   );

@@ -4,34 +4,33 @@ import { useState } from 'react';
 import dynamic from 'next/dynamic';
 import { content } from '@/lib/utils/content';
 
-interface Transaction {
+type Transaction = {
   id: number;
   user: string;
   amount: string;
   date: string;
-}
+};
 
-interface paymentProps {
-  data: Transaction[];
-}
-
+type PaymentProps = {
+  dashboardData: Transaction[];
+};
 const PaymentsTableRow = dynamic(() => import('./PaymentsTableRow'), { ssr: false });
 
-export default function PaymentsTable({ data }: paymentProps) {
+export default function PaymentsTable({ dashboardData }: PaymentProps) {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 6;
 
-  const totalPages = Math.ceil(data.length / itemsPerPage);
+  const totalPages = Math.ceil(dashboardData.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
-  const currentItems = data.slice(startIndex, startIndex + itemsPerPage);
+  const currentItems = dashboardData.slice(startIndex, startIndex + itemsPerPage);
 
   return (
     <div className="bg-card-bg rounded">
-      <div className="text-sm text-title font-medium px-4 py-1 flex items-center border-b border-border rounded-t">
+      <div className="text-sm text-title font-medium px-4 py-1 h-11 flex items-center border-b border-border rounded-t">
         {content.payments.title}
       </div>
 
-      <div className="px-4 flex flex-col items-center justify-between  h-96 w-full">
+      <div className="px-4 flex flex-col items-center justify-between h-96 w-full">
         <div className="w-full">
           <div className="flex items-center justify-between w-full py-2 rounded">
             <input
@@ -47,31 +46,31 @@ export default function PaymentsTable({ data }: paymentProps) {
               <option>{content.payments.column3}</option>
             </select>
           </div>
-
-          <table className="w-full text-sm border-collapse">
-            <thead className="text-left text-title bg-card-bg border-b border-border">
-              <tr>
-                <th className="p-2">
-                  <input type="checkbox" />
-                </th>
-                <th className="p-2">{content.payments.status}</th>
-                <th className="p-2">{content.payments.email}</th>
-                <th className="p-2">{content.payments.amount}</th>
-                <th className="p-2">{content.payments.totalNet}</th>
-              </tr>
-            </thead>
-            <tbody>
-              {currentItems.map(payment => (
-                <PaymentsTableRow key={payment.id} payment={payment} />
-              ))}
-            </tbody>
-          </table>
+          <div className="w-full rounded-3xl border border-border">
+            <table className="w-full text-sm border-collapse">
+              <thead className="text-left text-title bg-card-bg border-b border-border">
+                <tr>
+                  <th className="p-2">
+                    <input type="checkbox" />
+                  </th>
+                  <th className="p-2">{content.payments.status}</th>
+                  <th className="p-2">{content.payments.email}</th>
+                  <th className="p-2">{content.payments.amount}</th>
+                  <th className="p-2">{content.payments.totalNet}</th>
+                </tr>
+              </thead>
+              <tbody>
+                {currentItems.map(payment => (
+                  <PaymentsTableRow key={payment.id} payment={payment} />
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
-
         <div className="flex items-end  justify-between py-3 text-sm text-title w-full">
           <span>
-            {startIndex + 1} - {Math.min(startIndex + itemsPerPage, data.length)} of {data.length}{' '}
-            row(s)
+            {startIndex + 1} - {Math.min(startIndex + itemsPerPage, dashboardData.length)} of{' '}
+            {dashboardData.length} row(s)
           </span>
 
           <div className="flex items-center space-x-1n ">

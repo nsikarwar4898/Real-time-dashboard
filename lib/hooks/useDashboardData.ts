@@ -4,8 +4,8 @@ import { Layouts } from 'react-grid-layout';
 import { defaultLayouts } from '@/lib/utils/gridLayout';
 
 export function useDashboardData(initialData: DashboardApiResponse) {
-  const [data, setData] = useState(initialData);
-  const [loading, setLoading] = useState(false);
+  const [dashboardData, setDashboardData] = useState(initialData);
+  const [isLoading, setIsLoading] = useState(false);
   const [layout, setLayout] = useState<Layouts>(() => {
     if (typeof window !== 'undefined') {
       const saved = localStorage.getItem('dashboardLayout');
@@ -20,28 +20,28 @@ export function useDashboardData(initialData: DashboardApiResponse) {
     return defaultLayouts;
   });
   const [autoFetchEnabled, setAutoFetchEnabled] = useState(true);
-  const [lastUpdated, setLastUpdated] = useState('just now');
+  const [islastUpdated, setIsLastUpdated] = useState('just now');
   const [initialLoad, setInitialLoad] = useState(false);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
+  const [isEditMode, setIsEditMode] = useState(false);
 
-  const fetchData = async () => {
+  const fetchDashboardData = async () => {
     try {
-      setLoading(true);
-      const res = await fetch('/api/dashboard');
-      if (!res.ok) throw new Error('Failed to fetch');
-      const newData = await res.json();
-      setData(newData);
-      setLastUpdated(new Date().toLocaleTimeString());
+      setIsLoading(true);
+      const dashboardResponse = await fetch('/api/dashboard');
+      if (!dashboardResponse.ok) throw new Error('Failed to fetch');
+      const newData = await dashboardResponse.json();
+      setDashboardData(newData);
+      setIsLastUpdated(new Date().toLocaleTimeString());
     } catch (err) {
       console.error('Fetch error:', err);
-    } finally {
-      setLoading(false);
     }
+    setIsLoading(false);
   };
 
   useEffect(() => {
     if (autoFetchEnabled) {
-      intervalRef.current = setInterval(fetchData, 20000);
+      intervalRef.current = setInterval(fetchDashboardData, 20000);
     } else {
       if (intervalRef.current) clearInterval(intervalRef.current);
     }
@@ -70,16 +70,18 @@ export function useDashboardData(initialData: DashboardApiResponse) {
   };
 
   return {
-    data,
-    loading,
+    dashboardData,
+    isLoading,
     layout,
     autoFetchEnabled,
-    lastUpdated,
+    islastUpdated,
     initialLoad,
-    fetchData,
+    fetchDashboardData,
     resetLayout,
     setAutoFetchEnabled,
     handleLayoutChange,
     setLayout,
+    isEditMode,
+    setIsEditMode,
   };
 }

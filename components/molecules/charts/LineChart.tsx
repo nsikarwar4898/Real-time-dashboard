@@ -25,14 +25,15 @@ ChartJS.register(
   Filler
 );
 
-interface SalesOverTime {
-  labels: string[];
-  data: number[];
-}
+type LineChartProps = {
+  labels: string[]; // e.g., ['2025-08-01', '2025-07-31', ...]
+  dashboardData: number[]; // e.g., [105, 165, 50, ...]
+};
 
-export default function LineChart({ data, labels }: SalesOverTime) {
+export default function LineChart({ dashboardData, labels }: LineChartProps) {
   const lineLabels = labels.map(label => label.split('-')[2]).reverse();
-  const lineSales = data.map(item => item).reverse();
+  const lineSales = dashboardData.map(item => item).reverse();
+  // const lineSales2 = [100, 300, 400, 250, 500, 650];
 
   const lineData = {
     labels: lineLabels,

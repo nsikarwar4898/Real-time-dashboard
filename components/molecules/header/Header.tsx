@@ -1,6 +1,6 @@
 'use client';
 
-import Logo from '@/components/icons/Logo';
+import { Logo } from '@/components/icons';
 import { HiSun } from 'react-icons/hi';
 import { content } from '@/lib/utils/content';
 
