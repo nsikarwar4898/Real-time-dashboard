@@ -29,7 +29,7 @@ export default function DashboardClient({ initialData }: Props) {
 
   const [editMode, setEditMode] = useState(false);
   const SkeletonWrapper = withSkeletonWrapper();
-  const Map = dynamic(() => import('@/components/molecules/dashboard/Map'), { ssr: false });
+  const Map = dynamic(() => import('@/components/molecules/map/Map'), { ssr: false });
   const LineChart = dynamic(() => import('@/components/molecules/charts/LineChart'), {
     ssr: false,
   });
