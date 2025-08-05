@@ -26,11 +26,11 @@ export default function PaymentsTable({ dashboardData }: PaymentProps) {
 
   return (
     <div className="bg-card-bg rounded">
-      <div className="text-sm text-title font-medium px-4 py-1 flex items-center border-b border-border rounded-t">
+      <div className="text-sm text-title font-medium px-4 py-1 h-11 flex items-center border-b border-border rounded-t">
         {content.payments.title}
       </div>
 
-      <div className="px-4 flex flex-col items-center justify-between  h-96 w-full">
+      <div className="px-4 flex flex-col items-center justify-between h-96 w-full">
         <div className="w-full">
           <div className="flex items-center justify-between w-full py-2 rounded">
             <input
