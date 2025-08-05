@@ -4,7 +4,7 @@ import { content } from '@/lib/utils/content';
 
 export default function Summary() {
   return (
-    <div className="bg-card-bg">
+    <div className="bg-card-bg rounded">
       <div className="text-sm text-title font-medium px-3 flex items-center h-6 pb-4 border-b border-border rounded-t">
         {content.summary.title}
       </div>

@@ -48,7 +48,7 @@ export default function DashboardClient({ initialData }: DashboardClientProps) {
     >
       <div key="summary">
         <SkeletonWrapper loading={isLoading}>
-          <div className="p-4">
+          <div className="p-4 h-full">
             <Summary />
           </div>
         </SkeletonWrapper>
