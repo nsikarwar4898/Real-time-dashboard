@@ -41,7 +41,7 @@ export const content = {
     trendingBy: 'Trending up by',
     percent: '5.2%',
     this: 'this month',
-    timeline: 'January – June 2025',
+    timeline: 'August-2025',
     topProducts: 'Top Products',
     prod1: ' ACME Prod - 01',
     prod2: ' ACME Prod - 02',

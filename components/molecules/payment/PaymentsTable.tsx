@@ -46,9 +46,9 @@ export default function PaymentsTable({ dashboardData }: PaymentProps) {
               <option>{content.payments.column3}</option>
             </select>
           </div>
-          <div className="w-full rounded-3xl border border-border">
+          <div className="w-full rounded border border-border">
             <table className="w-full text-sm border-collapse">
-              <thead className="text-left text-title bg-card-bg border-b border-border">
+              <thead className="text-left text-title bg-card-bg">
                 <tr>
                   <th className="p-2">
                     <input type="checkbox" />
