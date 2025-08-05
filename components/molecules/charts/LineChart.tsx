@@ -78,7 +78,7 @@ export default function LineChart({ data, labels }: SalesOverTime) {
       },
       title: {
         display: false,
-        text: 'Sales Trend (Jan - Jun)',
+        text: 'Sales Trend',
       },
     },
     scales: {

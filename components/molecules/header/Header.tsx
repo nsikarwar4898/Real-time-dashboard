@@ -2,6 +2,7 @@
 
 import Logo from '@/components/icons/Logo';
 import { HiSun } from 'react-icons/hi';
+import { content } from '@/lib/utils/content';
 
 type Props = {
   editMode: boolean;
@@ -17,7 +18,7 @@ export default function Header({ editMode, onToggleEditMode, onReset }: Props) {
           onClick={onReset}
           className="px-3 py-1 text-sm border text-title border-border rounded "
         >
-          Reset to default
+          {content.header.resetButton}
         </button>
 
         <label className="inline-flex items-center cursor-pointer border-border">
@@ -33,13 +34,13 @@ export default function Header({ editMode, onToggleEditMode, onReset }: Props) {
               style={{ transform: editMode ? 'translateX(20px)' : 'translateX(0)' }}
             />
           </div>
-          <span className="ml-2 text-sm text-title">Edit mode</span>
+          <span className="ml-2 text-sm text-title">{content.header.editButton}</span>
         </label>
       </div>
 
       <div className="flex items-center gap-2">
         <span className="text-blue-800 font-semibold text-xl flex items-center gap-1">
-          <Logo /> acme
+          <Logo /> {content.header.title}
         </span>
       </div>
 

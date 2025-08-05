@@ -1,34 +1,39 @@
 'use client';
 
+import { content } from '@/lib/utils/content';
+
 export default function Summary() {
   return (
     <div className="bg-card-bg">
       <div className="text-sm text-title font-medium px-3 flex items-center h-6 pb-4 border-b border-border rounded-t">
-        Summary
+        {content.summary.title}
       </div>
 
       <div className="divide-y divide-border text-sm mt-3">
         <div className="px-4 py-2">
-          <div className="text-text">Total sales</div>
+          <div className="text-text">{content.summary.sales}</div>
           <div className="text-lg text-title font-semibold">
-            $150,000.00 <span className="text-sm font-normal">USD</span>
+            {content.summary.salesNumber}{' '}
+            <span className="text-sm font-normal">{content.summary.currency}</span>
           </div>
         </div>
         <div className="px-4 py-2">
-          <div className="text-text">Total expenses</div>
+          <div className="text-text">{content.summary.expenses}</div>
           <div className="text-lg text-title font-semibold">
-            $12,500.00 <span className="text-sm font-normal">USD</span>
+            {content.summary.expensesNumber}
+            <span className="text-sm font-normal">{content.summary.currency}</span>
           </div>
         </div>
         <div className="px-4 py-2">
-          <div className="text-text">Gross profit</div>
+          <div className="text-text">{content.summary.profit}</div>
           <div className="text-lg text-title font-semibold">
-            $137,500.00 <span className="text-sm font-normal">USD</span>
+            {content.summary.profitNumber}{' '}
+            <span className="text-sm font-normal">{content.summary.currency}</span>
           </div>
         </div>
         <div className="px-4 py-2">
-          <div className="text-text">Total orders</div>
-          <div className="text-lg text-title font-semibold">1,428</div>
+          <div className="text-text">{content.summary.orders}</div>
+          <div className="text-lg text-title font-semibold">{content.summary.orderNumber}</div>
         </div>
       </div>
     </div>

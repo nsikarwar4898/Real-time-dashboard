@@ -68,7 +68,7 @@ export default function HorizontalBarChart({ data }: horizontalChartProps) {
       legend: { display: false, position: 'top' as const },
       title: {
         display: false,
-        text: 'Monthly Data (Jan - Jun)',
+        text: 'Monthly Data',
       },
     },
     scales: {
