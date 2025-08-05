@@ -1,2 +1,1 @@
-export { SummarySkeleton } from './DashboardSkeleton';
-// export { default as Map } from './Map';
+export { SummarySkeleton } from './Skeleton';
