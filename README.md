@@ -95,7 +95,10 @@ _## 🌟 Possible Enhancements_
 
 ![Dashboard Preview](./public/readme-assets/dashboard-dark.png)
 ![Dashboard Preview](./public/readme-assets/dashboard-light.png)
-<video src="README-assets/demo-video.mp4" controls width="700"></video>
+
+---
+
+🎬 **Watch the [Demo Video](./public/readme-assets/demo-video.mp4)**
 
 ---
 
