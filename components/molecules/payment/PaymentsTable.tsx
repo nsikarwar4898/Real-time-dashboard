@@ -15,7 +15,17 @@ type PaymentProps = {
   dashboardData: Transaction[];
 };
 const PaymentsTableRow = dynamic(() => import('./PaymentsTableRow'), { ssr: false });
-
+const columnOptions = [
+  content.payments.column1,
+  content.payments.column2,
+  content.payments.column3,
+];
+const tableHeaders = [
+  content.payments.status,
+  content.payments.email,
+  content.payments.amount,
+  content.payments.totalNet,
+];
 export default function PaymentsTable({ dashboardData }: PaymentProps) {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 6;
@@ -41,24 +51,26 @@ export default function PaymentsTable({ dashboardData }: PaymentProps) {
 
             <select className="border text-title border-border text-sm px-2 py-1 rounded bg-card-bg">
               <option>{content.payments.columns}</option>
-              <option>{content.payments.column1}</option>
-              <option>{content.payments.column2}</option>
-              <option>{content.payments.column3}</option>
+              {columnOptions.map((column, index) => (
+                <option key={index}>{column}</option>
+              ))}
             </select>
           </div>
           <div className="w-full rounded border border-border">
             <table className="w-full text-sm border-collapse">
-              <thead className="text-left text-title bg-card-bg">
+              <thead className="text-left text-title bg-card-bg border-b border-border">
                 <tr>
                   <th className="p-2">
                     <input type="checkbox" />
                   </th>
-                  <th className="p-2">{content.payments.status}</th>
-                  <th className="p-2">{content.payments.email}</th>
-                  <th className="p-2">{content.payments.amount}</th>
-                  <th className="p-2">{content.payments.totalNet}</th>
+                  {tableHeaders.map((heading, index) => (
+                    <th key={index} className="p-2">
+                      {heading}
+                    </th>
+                  ))}
                 </tr>
               </thead>
+
               <tbody>
                 {currentItems.map(payment => (
                   <PaymentsTableRow key={payment.id} payment={payment} />
