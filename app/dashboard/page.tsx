@@ -1,7 +1,7 @@
-import { DashboardClient } from '@/components/Pages';
+import { Dashboard } from '@/components/Pages';
 import { fetchDashboardData } from '@/lib/api/fetchDashboardData';
 
 export default async function DashboardPage() {
   const initialData = await fetchDashboardData();
-  return <DashboardClient initialData={initialData} />;
+  return <Dashboard initialData={initialData} />;
 }
