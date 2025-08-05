@@ -28,9 +28,9 @@ export function useDashboardData(initialData: DashboardApiResponse) {
   const fetchDashboardData = async () => {
     try {
       setIsLoading(true);
-      const res = await fetch('/api/dashboard');
-      if (!res.ok) throw new Error('Failed to fetch');
-      const newData = await res.json();
+      const dashboardResponse = await fetch('/api/dashboard');
+      if (!dashboardResponse.ok) throw new Error('Failed to fetch');
+      const newData = await dashboardResponse.json();
       setDashboardData(newData);
       setIsLastUpdated(new Date().toLocaleTimeString());
     } catch (err) {
