@@ -91,6 +91,14 @@ _## 🌟 Possible Enhancements_
 
 ---
 
+## 🖼️ Preview
+
+![Dashboard Preview](./public/readme-assets/dashboard-dark.png)
+![Dashboard Preview](./public/readme-assets/dashboard-light.png)
+<video src="README-assets/demo-video.mp4" controls width="700"></video>
+
+---
+
 _## 🪪 License_
 
 This project is licensed under the [MIT License](__LICENSE__).
