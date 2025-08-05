@@ -96,7 +96,7 @@ export default function PaymentsTable({ dashboardData }: PaymentProps) {
 
             {Array.from({ length: totalPages }, (_, i) => (
               <button
-                key={i + 1}
+                key={i}
                 onClick={() => setCurrentPage(i + 1)}
                 className={`px-2 py-1 ${
                   currentPage === i + 1 ? 'bg-primary rounded' : 'text-title'

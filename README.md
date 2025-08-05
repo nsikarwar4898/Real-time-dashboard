@@ -81,19 +81,17 @@ _## 🧰 Technologies Used_
 - [Tailwind CSS v4](__https://tailwindcss.com/__)
 - [TypeScript](__https://www.typescriptlang.org/__)
 - [@faker-js/faker](__https://github.com/faker-js/faker__)
-- [Chart.js](__https://www.chartjs.org/__) **(optional)**
-- [Leaflet](__https://leafletjs.com/__) **(optional)**
+- [Chart.js](__https://www.chartjs.org/__)
+- [Leaflet](__https://leafletjs.com/__)
 
 ---
 
 _## 🌟 Possible Enhancements_
 
 - Add search and advanced filtering
-- Integrate real APIs for payments and telemetry
+- Integrate real APIs for payments
 - Persist layout or theme using `localStorage`
 - Support drag-and-drop dashboard customization
-- Add authentication with RBAC
-- Write tests using Jest + React Testing Library
 - Dockerize the app for container deployment
 
 ---
