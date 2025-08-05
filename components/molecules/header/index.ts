@@ -1,2 +1,2 @@
-export { default as Header } from '../header/Header';
-export { default as SubHeader } from '../header/SubHeader';
+export { default as Header } from './Header';
+export { default as TitleBar } from './TitleBar';

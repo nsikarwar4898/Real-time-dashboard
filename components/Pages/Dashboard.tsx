@@ -5,7 +5,7 @@ import { Responsive, WidthProvider } from 'react-grid-layout';
 import { DashboardApiResponse } from '@/lib/types/types';
 import { useDashboardData } from '@/lib/hooks/useDashboardData';
 import { withSkeletonWrapper } from '../hoc/withSkeletonWrapper';
-import { BarChart, PaymentsTable, Summary, Header, SubHeader } from '../molecules';
+import { BarChart, PaymentsTable, Summary, Header, TitleBar } from '../molecules';
 import HorizontalBarChart from '../molecules/charts/HorizontalChart';
 import { content } from '@/lib/utils/content';
 import 'react-grid-layout/css/styles.css';
@@ -44,7 +44,7 @@ export default function Dashboard({ initialData }: DashboardClientProps) {
         onReset={resetLayout}
       />
 
-      <SubHeader
+      <TitleBar
         lastUpdated={islastUpdated}
         autoFetchEnabled={autoFetchEnabled}
         onToggleAutoFetch={() => setAutoFetchEnabled(currentAutoFetch => !currentAutoFetch)}

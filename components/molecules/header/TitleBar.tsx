@@ -10,7 +10,7 @@ type Props = {
   onRefresh: () => void;
 };
 
-export default function SubHeader({
+export default function TitleBar({
   lastUpdated,
   autoFetchEnabled,
   onToggleAutoFetch,
