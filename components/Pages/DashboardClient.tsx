@@ -4,14 +4,15 @@ import { useState } from 'react';
 import { DashboardApiResponse } from '@/lib/types/types';
 import { useDashboardData } from '@/lib/hooks/useDashboardData';
 import {
-  DashboardLocations,
   DashboardOrders,
   DashboardPayments,
   DashboardSalesChart,
-  DashboardSummary,
   DashboardTopProducts,
 } from '../organisms';
 import { DashboardLayout } from '../layout';
+import { withSkeletonWrapper } from '../hoc/withSkeletonWrapper';
+import dynamic from 'next/dynamic';
+import { Summary } from '../molecules';
 
 type Props = {
   initialData: DashboardApiResponse;
@@ -32,6 +33,8 @@ export default function DashboardClient({ initialData }: Props) {
   } = useDashboardData(initialData);
 
   const [editMode, setEditMode] = useState(false);
+  const SkeletonWrapper = withSkeletonWrapper();
+  const Map = dynamic(() => import('@/components/molecules/dashboard/Map'), { ssr: false });
 
   return (
     <DashboardLayout
@@ -46,7 +49,11 @@ export default function DashboardClient({ initialData }: Props) {
       onLayoutChange={handleLayoutChange}
     >
       <div key="summary">
-        <DashboardSummary loading={loading} />
+        <SkeletonWrapper loading={loading}>
+          <div className="p-4">
+            <Summary />
+          </div>
+        </SkeletonWrapper>
       </div>
       <div key="orders">
         <DashboardOrders
@@ -76,7 +83,16 @@ export default function DashboardClient({ initialData }: Props) {
         />
       </div>
       <div key="locations">
-        <DashboardLocations loading={loading} locations={data.data.dashboardData.map.locations} />
+        <SkeletonWrapper loading={loading}>
+          <>
+            <div className="text-sm text-title font-medium px-4 py-2 border-b border-border">
+              Locations
+            </div>
+            <div className="flex-1 p-4 rounded-xl">
+              <Map locations={data.data.dashboardData.map.locations} />
+            </div>
+          </>
+        </SkeletonWrapper>
       </div>
     </DashboardLayout>
   );
