@@ -48,14 +48,14 @@ export default function DashboardClient({ initialData }: DashboardClientProps) {
     >
       <div key="summary">
         <SkeletonWrapper loading={isLoading}>
-          <div className="p-4 h-full">
+          <div className="h-full">
             <Summary />
           </div>
         </SkeletonWrapper>
       </div>
       <div key="orders">
         <SkeletonWrapper loading={isLoading}>
-          <div className="text-sm text-title p-2 border-b border-border">Orders</div>
+          <div className="text-sm text-title p-3 h-12 border-b border-border">Orders</div>
 
           <div className="flex-1 p-2">
             <HorizontalBarChart
@@ -74,7 +74,7 @@ export default function DashboardClient({ initialData }: DashboardClientProps) {
       </div>
       <div key="topProducts">
         <SkeletonWrapper loading={isLoading}>
-          <div className="text-sm text-title p-2 border-b border-border flex items-center">
+          <div className="text-sm text-title p-3 h-12 border-b border-border flex items-center">
             {content.dashboard.topProducts}
           </div>
 
