@@ -1,6 +1,6 @@
 'use client';
 
-import { BarChart, SummarySkeleton } from '@/components/organsims';
+import { BarChart, SummarySkeleton } from '@/components/molecules';
 
 type TopProduct = {
   id: string;

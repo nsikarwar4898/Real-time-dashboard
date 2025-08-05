@@ -4,7 +4,7 @@ import { ReactNode } from 'react';
 import { Layouts, Responsive, WidthProvider } from 'react-grid-layout';
 import 'react-grid-layout/css/styles.css';
 import 'react-resizable/css/styles.css';
-import { Header, SubHeader } from '../organsims';
+import { Header, SubHeader } from '../molecules';
 import React from 'react';
 
 const ResponsiveGridLayout = WidthProvider(Responsive);

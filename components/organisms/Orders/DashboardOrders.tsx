@@ -1,7 +1,7 @@
 'use client';
 
-import { SummarySkeleton } from '@/components/organsims';
-import HorizontalBarChart from '@/components/organsims/charts/HorizontalChart';
+import { SummarySkeleton } from '@/components/molecules';
+import HorizontalBarChart from '@/components/molecules/charts/HorizontalChart';
 
 type UserEngagementChartData = {
   labels: string[];

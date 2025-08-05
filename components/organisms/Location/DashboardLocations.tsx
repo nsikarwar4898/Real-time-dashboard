@@ -1,6 +1,6 @@
 'use client';
 
-import { SummarySkeleton } from '@/components/organsims';
+import { SummarySkeleton } from '@/components/molecules';
 import { Location } from '@/lib/types/types';
 import dynamic from 'next/dynamic';
 
@@ -8,7 +8,7 @@ type DashboardLocationsProps = {
   loading: boolean;
   locations: Location[];
 };
-const Map = dynamic(() => import('@/components/organsims/dashboard/Map'), {
+const Map = dynamic(() => import('@/components/molecules/dashboard/Map'), {
   ssr: false,
 });
 export default function DashboardLocations({ loading, locations }: DashboardLocationsProps) {

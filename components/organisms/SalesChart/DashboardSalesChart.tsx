@@ -1,9 +1,9 @@
 'use client';
 
-import { SummarySkeleton } from '@/components/organsims';
+import { SummarySkeleton } from '@/components/molecules';
 import dynamic from 'next/dynamic';
 
-const LineChart = dynamic(() => import('@/components/organsims/charts/LineChart'), { ssr: false });
+const LineChart = dynamic(() => import('@/components/molecules/charts/LineChart'), { ssr: false });
 
 type Props = {
   loading: boolean;

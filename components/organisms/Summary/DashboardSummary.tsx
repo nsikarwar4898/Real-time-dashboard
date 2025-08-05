@@ -1,6 +1,6 @@
 'use client';
 
-import { Summary, SummarySkeleton } from '@/components/organsims';
+import { Summary, SummarySkeleton } from '@/components/molecules';
 
 type DashboardSummaryProps = {
   loading: boolean;

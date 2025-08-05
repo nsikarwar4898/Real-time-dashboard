@@ -10,7 +10,7 @@ import {
   DashboardSalesChart,
   DashboardSummary,
   DashboardTopProducts,
-} from '../molecules';
+} from '../molecule';
 import { DashboardLayout } from '../layout';
 
 type Props = {
