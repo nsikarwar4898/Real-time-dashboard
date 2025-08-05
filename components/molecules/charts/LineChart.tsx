@@ -25,10 +25,10 @@ ChartJS.register(
   Filler
 );
 
-interface LineChartProps {
+type LineChartProps = {
   labels: string[]; // e.g., ['2025-08-01', '2025-07-31', ...]
   dashboardData: number[]; // e.g., [105, 165, 50, ...]
-}
+};
 
 export default function LineChart({ dashboardData, labels }: LineChartProps) {
   const lineLabels = labels.map(label => label.split('-')[2]).reverse();

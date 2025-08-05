@@ -11,16 +11,19 @@ import {
 } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
 import type { Chart } from 'chart.js';
+
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
-interface horizontalChartProps {
-  dashboardData: {
-    labels: string[];
-    data: number[];
-  };
-}
+type ChartData = {
+  labels: string[];
+  data: number[];
+};
 
-export default function HorizontalBarChart({ dashboardData }: horizontalChartProps) {
+type HorizontalChartProps = {
+  dashboardData: ChartData;
+};
+
+export default function HorizontalBarChart({ dashboardData }: HorizontalChartProps) {
   const weeks = dashboardData.labels;
   const fixedData = dashboardData.data;
 

@@ -4,20 +4,19 @@ import { useState } from 'react';
 import dynamic from 'next/dynamic';
 import { content } from '@/lib/utils/content';
 
-interface Transaction {
+type Transaction = {
   id: number;
   user: string;
   amount: string;
   date: string;
-}
+};
 
-interface paymentProps {
+type PaymentProps = {
   dashboardData: Transaction[];
-}
-
+};
 const PaymentsTableRow = dynamic(() => import('./PaymentsTableRow'), { ssr: false });
 
-export default function PaymentsTable({ dashboardData }: paymentProps) {
+export default function PaymentsTable({ dashboardData }: PaymentProps) {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 6;
 

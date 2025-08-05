@@ -14,13 +14,15 @@ import type { Chart } from 'chart.js';
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
-interface BarChartProps {
-  dashboardData: {
-    id: string;
-    name: string;
-    sales: number;
-  }[];
-}
+type DashboardItem = {
+  id: string;
+  name: string;
+  sales: number;
+};
+
+type BarChartProps = {
+  dashboardData: DashboardItem[];
+};
 
 function getCssVar(name: string): string {
   return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
