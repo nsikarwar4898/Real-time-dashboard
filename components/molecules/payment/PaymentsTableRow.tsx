@@ -22,8 +22,8 @@ function PaymentsTableRow({ payment }: PaymentsTableRowProps) {
       </td>
       <td className="p-2">{faker.datatype.boolean() ? 'success' : 'failure'}</td>
       <td className="p-2">{payment.user}@yahoo.com</td>
-      <td className="p-2">${payment.amount}</td>
-      <td className="p-2">${payment.amount}</td>
+      <td className="p-2">{payment.amount}</td>
+      <td className="p-2">{payment.amount}</td>
     </tr>
   );
 }
