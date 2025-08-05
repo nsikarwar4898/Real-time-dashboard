@@ -56,8 +56,8 @@ export default function PaymentsTable({ dashboardData }: PaymentProps) {
               ))}
             </select>
           </div>
-          <div className="w-full rounded border border-border">
-            <table className="w-full text-sm border-collapse">
+          <div className="w-full rounded border border-border overflow-x-auto">
+            <table className="min-w-[600px] w-full text-sm border-collapse">
               <thead className="text-left text-title bg-card-bg border-b border-border">
                 <tr>
                   <th className="p-2">
