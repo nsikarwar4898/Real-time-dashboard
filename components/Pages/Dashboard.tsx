@@ -26,11 +26,11 @@ export default function Dashboard({ initialData }: DashboardClientProps) {
     isLoading,
     islastUpdated,
     autoFetchEnabled,
+    isEditMode,
     fetchDashboardData,
     resetLayout,
     setAutoFetchEnabled,
     handleLayoutChange,
-    isEditMode,
     setIsEditMode,
   } = useDashboardData(initialData);
 

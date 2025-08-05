@@ -41,11 +41,6 @@ NEXT_PUBLIC_API_URL=your_api_url_here
 NEXT_PUBLIC_API_URL_TOKEN=your_token_here
 NEXT_PUBLIC_CENTER_LAT=39.8283
 NEXT_PUBLIC_CENTER_LNG=-98.5795
-NEXT_PUBLIC_ZOOM_LEVEL=5
-NEXT_PUBLIC_TILE_LAYER_URL=https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png
-NEXT_PUBLIC_TILE_LAYER_ATTRIBUTION=© OpenStreetMap contributors
-NEXT_PUBLIC_MAP_HEIGHT=480px
-NEXT_PUBLIC_MAP_WIDTH=100%
 ```
 
 _### 3. Install Dependencies_
@@ -81,20 +76,29 @@ _## 🧰 Technologies Used_
 - [Tailwind CSS v4](__https://tailwindcss.com/__)
 - [TypeScript](__https://www.typescriptlang.org/__)
 - [@faker-js/faker](__https://github.com/faker-js/faker__)
-- [Chart.js](__https://www.chartjs.org/__) **(optional)**
-- [Leaflet](__https://leafletjs.com/__) **(optional)**
+- [Chart.js](__https://www.chartjs.org/__)
+- [Leaflet](__https://leafletjs.com/__)
 
 ---
 
 _## 🌟 Possible Enhancements_
 
 - Add search and advanced filtering
-- Integrate real APIs for payments and telemetry
+- Integrate real APIs for payments
 - Persist layout or theme using `localStorage`
 - Support drag-and-drop dashboard customization
-- Add authentication with RBAC
-- Write tests using Jest + React Testing Library
 - Dockerize the app for container deployment
+
+---
+
+## 🖼️ Preview
+
+![Dashboard Preview](./public/readme-assets/dashboard-dark.png)
+![Dashboard Preview](./public/readme-assets/dashboard-light.png)
+
+---
+
+🎬 **Watch the [Demo Video](./public/readme-assets/demo-video.mp4)**
 
 ---
 

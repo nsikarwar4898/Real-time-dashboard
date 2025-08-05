@@ -70,6 +70,7 @@ export function useDashboardData(initialData: DashboardApiResponse) {
   };
 
   return {
+    isEditMode,
     dashboardData,
     isLoading,
     layout,
@@ -81,7 +82,6 @@ export function useDashboardData(initialData: DashboardApiResponse) {
     setAutoFetchEnabled,
     handleLayoutChange,
     setLayout,
-    isEditMode,
     setIsEditMode,
   };
 }
