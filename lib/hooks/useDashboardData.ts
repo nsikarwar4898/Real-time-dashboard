@@ -41,7 +41,7 @@ export function useDashboardData(initialData: DashboardApiResponse) {
 
   useEffect(() => {
     if (autoFetchEnabled) {
-      intervalRef.current = setInterval(fetchDashboardData, 20000);
+      intervalRef.current = setInterval(fetchDashboardData, 5000);
     } else {
       if (intervalRef.current) clearInterval(intervalRef.current);
     }
