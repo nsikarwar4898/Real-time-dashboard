@@ -41,11 +41,6 @@ NEXT_PUBLIC_API_URL=your_api_url_here
 NEXT_PUBLIC_API_URL_TOKEN=your_token_here
 NEXT_PUBLIC_CENTER_LAT=39.8283
 NEXT_PUBLIC_CENTER_LNG=-98.5795
-NEXT_PUBLIC_ZOOM_LEVEL=5
-NEXT_PUBLIC_TILE_LAYER_URL=https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png
-NEXT_PUBLIC_TILE_LAYER_ATTRIBUTION=© OpenStreetMap contributors
-NEXT_PUBLIC_MAP_HEIGHT=480px
-NEXT_PUBLIC_MAP_WIDTH=100%
 ```
 
 _### 3. Install Dependencies_
