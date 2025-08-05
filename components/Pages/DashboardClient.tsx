@@ -54,19 +54,17 @@ export default function DashboardClient({ initialData }: Props) {
       </div>
       <div key="orders">
         <SkeletonWrapper loading={loading}>
-          <>
-            <div className="text-sm text-title p-2 border-b border-border">Orders</div>
+          <div className="text-sm text-title p-2 border-b border-border">Orders</div>
 
-            <div className="flex-1 p-2">
-              <HorizontalBarChart data={data.data.dashboardData.charts.userEngagement} />
-            </div>
+          <div className="flex-1 p-2">
+            <HorizontalBarChart data={data.data.dashboardData.charts.userEngagement} />
+          </div>
 
-            <div className="px-4 pb-4 text-sm text-text">
-              Trending up by <span className="font-semibold text-title">5.2%</span> this month
-              <br />
-              <span className="text-xs text-muted">January – June 2027</span>
-            </div>
-          </>
+          <div className="px-4 pb-4 text-sm text-text">
+            Trending up by <span className="font-semibold text-title">5.2%</span> this month
+            <br />
+            <span className="text-xs text-muted">January – June 2027</span>
+          </div>
         </SkeletonWrapper>
       </div>
       <div key="topProducts">
@@ -111,14 +109,12 @@ export default function DashboardClient({ initialData }: Props) {
       </div>
       <div key="locations">
         <SkeletonWrapper loading={loading}>
-          <>
-            <div className="text-sm text-title font-medium px-4 py-2 border-b border-border">
-              Locations
-            </div>
-            <div className="flex-1 p-4 rounded-xl">
-              <Map locations={data.data.dashboardData.map.locations} />
-            </div>
-          </>
+          <div className="text-sm text-title font-medium px-4 py-2 border-b border-border">
+            Locations
+          </div>
+          <div className="flex-1 p-4 rounded-xl">
+            <Map locations={data.data.dashboardData.map.locations} />
+          </div>
         </SkeletonWrapper>
       </div>
     </DashboardLayout>
