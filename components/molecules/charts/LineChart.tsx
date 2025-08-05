@@ -26,14 +26,13 @@ ChartJS.register(
 );
 
 interface SalesOverTime {
-  labels: string[]; // e.g., ['2025-08-01', '2025-07-31', ...]
-  data: number[]; // e.g., [105, 165, 50, ...]
+  labels: string[];
+  data: number[];
 }
 
 export default function LineChart({ data, labels }: SalesOverTime) {
   const lineLabels = labels.map(label => label.split('-')[2]).reverse();
   const lineSales = data.map(item => item).reverse();
-  // const lineSales2 = [100, 300, 400, 250, 500, 650];
 
   const lineData = {
     labels: lineLabels,
@@ -79,7 +78,7 @@ export default function LineChart({ data, labels }: SalesOverTime) {
       },
       title: {
         display: false,
-        text: 'Sales Trend (Jan - Jun)',
+        text: 'Sales Trend',
       },
     },
     scales: {
@@ -92,13 +91,33 @@ export default function LineChart({ data, labels }: SalesOverTime) {
           display: false,
         },
         ticks: {
-          color: () => {
-            return getCssVar('--text');
-          },
+          color: () => getCssVar('--text'),
           font: {
             size: 14,
             weight: 'bold' as const,
           },
+          callback: function (val, index, ticks) {
+            const total = ticks.length;
+            const first = 0;
+            const last = total - 1;
+            const mid = Math.floor(total / 2);
+
+            if (index !== first && index !== mid && index !== last) {
+              return '';
+            }
+
+            const fullDate = [...labels].reverse()[index];
+
+            if (!fullDate) return '';
+            const dateObj = new Date(fullDate);
+            const day = dateObj.getDate();
+            const month = dateObj.toLocaleString('default', { month: 'short' });
+
+            return `${day} ${month}`;
+          },
+          autoSkip: false,
+          maxRotation: 0,
+          minRotation: 0,
         },
       },
       y: {

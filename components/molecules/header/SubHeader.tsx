@@ -1,6 +1,7 @@
 'use client';
 
 import { FiPlay, FiPause, FiRefreshCw } from 'react-icons/fi';
+import { content } from '@/lib/utils/content';
 
 type Props = {
   lastUpdated: string;
@@ -17,10 +18,14 @@ export default function SubHeader({
 }: Props) {
   return (
     <div className="flex  flex-col md:flex-row items-center justify-between px-3 py-3 bg-background">
-      <h1 className="text-2xl text-title flex justify-start pl-4 md:pl-1 w-full   font-bold">Dashboard</h1>
+      <h1 className="text-2xl text-title flex justify-start pl-4 md:pl-1 w-full   font-bold">
+        {content.subHeader.title}
+      </h1>
 
       <div className="flex items-center w-full justify-around md:justify-end gap-2 text-sm text-title">
-        <span>Last updated {lastUpdated}</span>
+        <span>
+          {content.subHeader.updateStatus} {lastUpdated}
+        </span>
 
         <button
           onClick={onToggleAutoFetch}
@@ -29,12 +34,12 @@ export default function SubHeader({
           {autoFetchEnabled ? (
             <>
               <FiPause className="w-4 h-4" />
-              <p className="text-sm md:text-nowrap">Pause auto-fetch</p>
+              <p className="text-sm md:text-nowrap">{content.subHeader.pause}</p>
             </>
           ) : (
             <>
               <FiPlay className="w-4 h-4" />
-              Resume auto-fetch
+              {content.subHeader.resume}
             </>
           )}
         </button>

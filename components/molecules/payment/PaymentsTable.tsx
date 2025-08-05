@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import dynamic from 'next/dynamic';
+import { content } from '@/lib/utils/content';
 
 interface Transaction {
   id: number;
@@ -27,7 +28,7 @@ export default function PaymentsTable({ data }: paymentProps) {
   return (
     <div className="bg-card-bg rounded">
       <div className="text-sm text-title font-medium px-4 py-1 flex items-center border-b border-border rounded-t">
-        Payments history
+        {content.payments.title}
       </div>
 
       <div className="px-4 flex flex-col items-center justify-between  h-96 w-full">
@@ -40,10 +41,10 @@ export default function PaymentsTable({ data }: paymentProps) {
             />
 
             <select className="border text-title border-border text-sm px-2 py-1 rounded bg-card-bg">
-              <option>Columns</option>
-              <option>Column 1</option>
-              <option>Column 2</option>
-              <option>Column 3</option>
+              <option>{content.payments.columns}</option>
+              <option>{content.payments.column1}</option>
+              <option>{content.payments.column2}</option>
+              <option>{content.payments.column3}</option>
             </select>
           </div>
 
@@ -53,10 +54,10 @@ export default function PaymentsTable({ data }: paymentProps) {
                 <th className="p-2">
                   <input type="checkbox" />
                 </th>
-                <th className="p-2">Status</th>
-                <th className="p-2">Email</th>
-                <th className="p-2">Amount</th>
-                <th className="p-2">Total net</th>
+                <th className="p-2">{content.payments.status}</th>
+                <th className="p-2">{content.payments.email}</th>
+                <th className="p-2">{content.payments.amount}</th>
+                <th className="p-2">{content.payments.totalNet}</th>
               </tr>
             </thead>
             <tbody>
