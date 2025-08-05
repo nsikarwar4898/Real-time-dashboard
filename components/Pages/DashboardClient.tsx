@@ -3,16 +3,10 @@
 import { useState } from 'react';
 import { DashboardApiResponse } from '@/lib/types/types';
 import { useDashboardData } from '@/lib/hooks/useDashboardData';
-import {
-  DashboardOrders,
-  DashboardPayments,
-  DashboardSalesChart,
-  DashboardTopProducts,
-} from '../organisms';
 import { DashboardLayout } from '../layout';
 import { withSkeletonWrapper } from '../hoc/withSkeletonWrapper';
 import dynamic from 'next/dynamic';
-import { BarChart, Summary } from '../molecules';
+import { BarChart, PaymentsTable, Summary } from '../molecules';
 import HorizontalBarChart from '../molecules/charts/HorizontalChart';
 
 type Props = {
@@ -111,10 +105,9 @@ export default function DashboardClient({ initialData }: Props) {
         </SkeletonWrapper>
       </div>
       <div key="payments">
-        <DashboardPayments
-          loading={loading}
-          data={data.data.dashboardData.tables.recentTransactions}
-        />
+        <SkeletonWrapper loading={loading}>
+          <PaymentsTable data={data.data.dashboardData.tables.recentTransactions} />
+        </SkeletonWrapper>
       </div>
       <div key="locations">
         <SkeletonWrapper loading={loading}>
